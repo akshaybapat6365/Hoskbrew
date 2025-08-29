@@ -334,6 +334,54 @@
             transform: scale(1.05);
         }
         
+        /* Floating Live Link */
+        .floating-live-btn {
+            position: fixed;
+            right: 20px;
+            top: 50%;
+            transform: translateY(-50%);
+            z-index: 1000;
+            background: linear-gradient(135deg, rgba(0, 0, 0, 0.9), rgba(0, 212, 255, 0.1));
+            border: 2px solid var(--neon-blue);
+            border-radius: 50px;
+            padding: 1rem 2rem;
+            color: var(--neon-blue);
+            text-decoration: none;
+            font-family: 'Orbitron', monospace;
+            font-weight: 700;
+            font-size: 0.9rem;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            transition: all 0.3s ease;
+            backdrop-filter: blur(20px);
+            box-shadow: 0 0 30px rgba(0, 212, 255, 0.3);
+            writing-mode: vertical-rl;
+            text-orientation: mixed;
+        }
+        
+        .floating-live-btn:hover {
+            border-color: var(--neon-pink);
+            color: var(--neon-pink);
+            transform: translateY(-50%) scale(1.1);
+            box-shadow: 0 0 50px rgba(255, 0, 128, 0.5);
+            text-shadow: 0 0 20px var(--neon-pink);
+        }
+        
+        .floating-live-btn::before {
+            content: '🌐';
+            position: absolute;
+            top: -10px;
+            left: 50%;
+            transform: translateX(-50%);
+            font-size: 1.2rem;
+            animation: pulse 2s ease-in-out infinite;
+        }
+        
+        @keyframes pulse {
+            0%, 100% { opacity: 1; transform: translateX(-50%) scale(1); }
+            50% { opacity: 0.7; transform: translateX(-50%) scale(1.2); }
+        }
+        
         /* Hero Section */
         .hero {
             min-height: 100vh;
@@ -806,6 +854,11 @@
     <div class="cyber-grid"></div>
     <div class="scanlines"></div>
     
+    <!-- Floating Live Link -->
+    <a href="https://akshaybapat6365.github.io/Hoskbrew-/ultimate-cyberpunk.html" target="_blank" class="floating-live-btn" title="Access Live Cyberpunk Matrix">
+        LIVE MATRIX
+    </a>
+    
     <!-- Floating Orbs -->
     <div class="orb" style="width: 10px; height: 10px; background: radial-gradient(circle, var(--neon-blue), transparent); left: 10%; animation-delay: 0s;"></div>
     <div class="orb" style="width: 8px; height: 8px; background: radial-gradient(circle, var(--neon-pink), transparent); left: 30%; animation-delay: 3s;"></div>
@@ -914,10 +967,14 @@
                     <br/><br/>
                     <strong style="color: var(--neon-blue); text-shadow: 0 0 15px var(--neon-blue);">🔗 SOURCE CODE MATRIX:</strong><br/>
                     <a href="https://github.com/akshaybapat6365/Hoskbrew-" target="_blank" class="github-link" style="color: var(--neon-green); text-decoration: none; font-family: 'Share Tech Mono', monospace; font-weight: 600; text-shadow: 0 0 15px var(--neon-green); transition: all 0.3s ease;">github.com/akshaybapat6365/Hoskbrew-</a>
+                    <br/><br/>
+                    <strong style="color: var(--neon-pink); text-shadow: 0 0 15px var(--neon-pink);">🌐 LIVE CYBERPUNK MATRIX:</strong><br/>
+                    <a href="https://akshaybapat6365.github.io/Hoskbrew-/ultimate-cyberpunk.html" target="_blank" class="live-link" style="color: var(--neon-blue); text-decoration: none; font-family: 'Share Tech Mono', monospace; font-weight: 600; text-shadow: 0 0 15px var(--neon-blue); transition: all 0.3s ease;">akshaybapat6365.github.io/Hoskbrew-</a>
                 </p>
                 <div style="display: flex; gap: 2rem; justify-content: center; flex-wrap: wrap; margin-top: 3rem;">
                     <a href="#contact" class="cyber-btn" style="font-size: 1.1rem; padding: 1.5rem 4rem;">JOIN THE RESISTANCE</a>
                     <a href="https://github.com/akshaybapat6365/Hoskbrew-" target="_blank" class="cyber-btn secondary" style="font-size: 1.1rem; padding: 1.5rem 4rem;">ACCESS REPOSITORY</a>
+                    <a href="https://akshaybapat6365.github.io/Hoskbrew-/ultimate-cyberpunk.html" target="_blank" class="cyber-btn accent" style="font-size: 1.1rem; padding: 1.5rem 4rem;">LIVE MATRIX</a>
                 </div>
             </div>
         </div>
