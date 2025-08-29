@@ -1,0 +1,4 @@
+themes/shop/default/build/assets/nul
+*.log
+.DS_Store
+Thumbs.db

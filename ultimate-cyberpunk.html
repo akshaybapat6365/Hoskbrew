@@ -15,6 +15,9 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/particles.js/2.0.0/particles.min.js"></script>
     
+    <!-- GitHub OAuth -->
+    <script src="https://unpkg.com/@octokit/rest@19.0.11/dist/web/octokit-rest.min.js"></script>
+    
     <style>
         :root {
             --neon-blue: #00d4ff;
@@ -246,6 +249,89 @@
             color: var(--neon-blue);
             text-shadow: 0 0 20px var(--neon-blue);
             transform: translateY(-2px);
+        }
+        
+        /* GitHub OAuth Button */
+        .github-oauth-btn {
+            background: linear-gradient(45deg, #333, #24292e);
+            border: 2px solid var(--neon-blue);
+            color: var(--text-glow);
+            padding: 0.5rem 1rem;
+            border-radius: 8px;
+            font-family: 'Share Tech Mono', monospace;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .github-oauth-btn::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(0, 212, 255, 0.4), transparent);
+            transition: left 0.5s ease;
+        }
+        
+        .github-oauth-btn:hover::before {
+            left: 100%;
+        }
+        
+        .github-oauth-btn:hover {
+            border-color: var(--neon-pink);
+            text-shadow: 0 0 20px var(--neon-pink);
+            transform: translateY(-2px) scale(1.05);
+            box-shadow: 0 5px 20px rgba(0, 212, 255, 0.3);
+        }
+        
+        /* User Profile Display */
+        .user-profile {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            padding: 0.5rem 1rem;
+            background: rgba(0, 0, 0, 0.8);
+            border: 1px solid var(--neon-green);
+            border-radius: 8px;
+            backdrop-filter: blur(10px);
+        }
+        
+        .user-profile img {
+            width: 32px;
+            height: 32px;
+            border-radius: 50%;
+            border: 2px solid var(--neon-green);
+        }
+        
+        .user-profile .username {
+            color: var(--neon-green);
+            font-family: 'Share Tech Mono', monospace;
+            font-weight: 600;
+            font-size: 0.9rem;
+        }
+        
+        .logout-btn {
+            background: none;
+            border: 1px solid var(--neon-pink);
+            color: var(--neon-pink);
+            padding: 0.25rem 0.5rem;
+            border-radius: 4px;
+            font-family: 'Share Tech Mono', monospace;
+            font-size: 0.8rem;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+        
+        .logout-btn:hover {
+            background: var(--neon-pink);
+            color: var(--dark-bg);
+            transform: scale(1.05);
         }
         
         /* Hero Section */
@@ -737,6 +823,8 @@
                 <li><a href="#products">HARDWARE</a></li>
                 <li><a href="#about">PROTOCOL</a></li>
                 <li><a href="#contact">INTERFACE</a></li>
+                <li><button id="github-login-btn" class="github-oauth-btn">GitHub Auth</button></li>
+                <li><div id="user-profile" class="user-profile" style="display: none;"></div></li>
             </ul>
         </div>
     </nav>
@@ -823,8 +911,14 @@
                     Through quantum-level diagnostics and bio-digital fabrication, we ensure no gaming consciousness is ever permanently deleted.
                     <br/><br/>
                     Interface with our collective. Together, we maintain the eternal gaming matrix and resist the corporate deletion protocols.
+                    <br/><br/>
+                    <strong style="color: var(--neon-blue); text-shadow: 0 0 15px var(--neon-blue);">🔗 SOURCE CODE MATRIX:</strong><br/>
+                    <a href="https://github.com/akshaybapat6365/Hoskbrew-" target="_blank" class="github-link" style="color: var(--neon-green); text-decoration: none; font-family: 'Share Tech Mono', monospace; font-weight: 600; text-shadow: 0 0 15px var(--neon-green); transition: all 0.3s ease;">github.com/akshaybapat6365/Hoskbrew-</a>
                 </p>
-                <a href="#contact" class="cyber-btn" style="margin-top: 3rem; font-size: 1.1rem; padding: 1.5rem 4rem;">JOIN THE RESISTANCE</a>
+                <div style="display: flex; gap: 2rem; justify-content: center; flex-wrap: wrap; margin-top: 3rem;">
+                    <a href="#contact" class="cyber-btn" style="font-size: 1.1rem; padding: 1.5rem 4rem;">JOIN THE RESISTANCE</a>
+                    <a href="https://github.com/akshaybapat6365/Hoskbrew-" target="_blank" class="cyber-btn secondary" style="font-size: 1.1rem; padding: 1.5rem 4rem;">ACCESS REPOSITORY</a>
+                </div>
             </div>
         </div>
     </section>
@@ -1055,10 +1149,267 @@
             }
         });
         
+        // GitHub OAuth Configuration
+        const GITHUB_CONFIG = {
+            clientId: 'YOUR_GITHUB_CLIENT_ID', // Replace with your GitHub App Client ID
+            redirectUri: window.location.origin + window.location.pathname,
+            scopes: 'user:email,read:user'
+        };
+        
+        // GitHub OAuth Class
+        class GitHubOAuth {
+            constructor() {
+                this.accessToken = localStorage.getItem('github_token');
+                this.userInfo = JSON.parse(localStorage.getItem('github_user') || 'null');
+                this.init();
+            }
+            
+            init() {
+                // Check if returning from GitHub OAuth
+                const urlParams = new URLSearchParams(window.location.search);
+                const code = urlParams.get('code');
+                
+                if (code && !this.accessToken) {
+                    this.exchangeCodeForToken(code);
+                } else if (this.accessToken) {
+                    this.showUserProfile(this.userInfo);
+                }
+                
+                this.bindEvents();
+            }
+            
+            bindEvents() {
+                const loginBtn = document.getElementById('github-login-btn');
+                if (loginBtn) {
+                    loginBtn.addEventListener('click', () => this.login());
+                }
+            }
+            
+            login() {
+                const authUrl = `https://github.com/login/oauth/authorize?client_id=${GITHUB_CONFIG.clientId}&redirect_uri=${encodeURIComponent(GITHUB_CONFIG.redirectUri)}&scope=${GITHUB_CONFIG.scopes}&response_type=code`;
+                
+                // Create a stylized loading message
+                const loginBtn = document.getElementById('github-login-btn');
+                const originalText = loginBtn.textContent;
+                loginBtn.textContent = 'CONNECTING...';
+                loginBtn.disabled = true;
+                
+                // Show cyberpunk-style notification
+                this.showNotification('🔗 ESTABLISHING SECURE CONNECTION TO GITHUB MATRIX...', 'info');
+                
+                setTimeout(() => {
+                    window.location.href = authUrl;
+                }, 1500);
+            }
+            
+            async exchangeCodeForToken(code) {
+                try {
+                    this.showNotification('🔐 DECRYPTING AUTHORIZATION CODE...', 'info');
+                    
+                    // Note: In production, this should be handled by your backend
+                    // This is a demonstration - you'll need a backend service to exchange the code
+                    const response = await fetch('https://github.com/login/oauth/access_token', {
+                        method: 'POST',
+                        headers: {
+                            'Accept': 'application/json',
+                            'Content-Type': 'application/json',
+                        },
+                        body: JSON.stringify({
+                            client_id: GITHUB_CONFIG.clientId,
+                            client_secret: 'YOUR_GITHUB_CLIENT_SECRET', // This should be handled by backend!
+                            code: code,
+                            redirect_uri: GITHUB_CONFIG.redirectUri
+                        })
+                    });
+                    
+                    const data = await response.json();
+                    
+                    if (data.access_token) {
+                        this.accessToken = data.access_token;
+                        localStorage.setItem('github_token', this.accessToken);
+                        await this.fetchUserInfo();
+                        
+                        // Clean up URL
+                        window.history.replaceState({}, document.title, window.location.pathname);
+                    } else {
+                        throw new Error('Failed to get access token');
+                    }
+                } catch (error) {
+                    console.error('OAuth Error:', error);
+                    this.showNotification('❌ NEURAL LINK FAILED - AUTHENTICATION ERROR', 'error');
+                }
+            }
+            
+            async fetchUserInfo() {
+                try {
+                    const response = await fetch('https://api.github.com/user', {
+                        headers: {
+                            'Authorization': `token ${this.accessToken}`,
+                            'Accept': 'application/vnd.github.v3+json'
+                        }
+                    });
+                    
+                    if (response.ok) {
+                        const userData = await response.json();
+                        this.userInfo = userData;
+                        localStorage.setItem('github_user', JSON.stringify(userData));
+                        this.showUserProfile(userData);
+                        this.showNotification(`✅ NEURAL LINK ESTABLISHED - WELCOME ${userData.login.toUpperCase()}`, 'success');
+                    } else {
+                        throw new Error('Failed to fetch user data');
+                    }
+                } catch (error) {
+                    console.error('User fetch error:', error);
+                    this.showNotification('⚠️ USER DATA RETRIEVAL FAILED', 'error');
+                }
+            }
+            
+            showUserProfile(userData) {
+                const loginBtn = document.getElementById('github-login-btn');
+                const userProfile = document.getElementById('user-profile');
+                
+                if (loginBtn && userProfile && userData) {
+                    loginBtn.style.display = 'none';
+                    userProfile.style.display = 'flex';
+                    
+                    userProfile.innerHTML = `
+                        <img src="${userData.avatar_url}" alt="${userData.login}" title="${userData.name || userData.login}">
+                        <span class="username">${userData.login}</span>
+                        <button class="logout-btn" onclick="githubAuth.logout()">LOGOUT</button>
+                    `;
+                }
+            }
+            
+            logout() {
+                localStorage.removeItem('github_token');
+                localStorage.removeItem('github_user');
+                this.accessToken = null;
+                this.userInfo = null;
+                
+                const loginBtn = document.getElementById('github-login-btn');
+                const userProfile = document.getElementById('user-profile');
+                
+                if (loginBtn && userProfile) {
+                    loginBtn.style.display = 'block';
+                    loginBtn.textContent = 'GitHub Auth';
+                    loginBtn.disabled = false;
+                    userProfile.style.display = 'none';
+                }
+                
+                this.showNotification('🔌 NEURAL LINK DISCONNECTED', 'info');
+            }
+            
+            showNotification(message, type = 'info') {
+                // Create cyberpunk-style notification
+                const notification = document.createElement('div');
+                notification.className = `cyber-notification ${type}`;
+                notification.innerHTML = `
+                    <div class="notification-content">
+                        <span class="notification-text">${message}</span>
+                        <button class="notification-close">×</button>
+                    </div>
+                `;
+                
+                // Add notification styles dynamically
+                if (!document.querySelector('#notification-styles')) {
+                    const styles = document.createElement('style');
+                    styles.id = 'notification-styles';
+                    styles.textContent = `
+                        .cyber-notification {
+                            position: fixed;
+                            top: 100px;
+                            right: 20px;
+                            background: rgba(0, 0, 0, 0.95);
+                            border: 2px solid var(--neon-blue);
+                            border-radius: 8px;
+                            padding: 1rem;
+                            z-index: 10001;
+                            backdrop-filter: blur(20px);
+                            animation: slideInRight 0.5s ease;
+                            max-width: 400px;
+                            box-shadow: 0 0 30px rgba(0, 212, 255, 0.5);
+                        }
+                        .cyber-notification.success {
+                            border-color: var(--neon-green);
+                            box-shadow: 0 0 30px rgba(0, 255, 65, 0.5);
+                        }
+                        .cyber-notification.error {
+                            border-color: var(--neon-pink);
+                            box-shadow: 0 0 30px rgba(255, 0, 128, 0.5);
+                        }
+                        .notification-content {
+                            display: flex;
+                            align-items: center;
+                            justify-content: space-between;
+                            gap: 1rem;
+                        }
+                        .notification-text {
+                            color: var(--text-glow);
+                            font-family: 'Share Tech Mono', monospace;
+                            font-size: 0.9rem;
+                            text-shadow: 0 0 10px currentColor;
+                        }
+                        .notification-close {
+                            background: none;
+                            border: none;
+                            color: var(--neon-pink);
+                            font-size: 1.2rem;
+                            cursor: pointer;
+                            padding: 0;
+                            width: 20px;
+                            height: 20px;
+                            display: flex;
+                            align-items: center;
+                            justify-content: center;
+                        }
+                        .notification-close:hover {
+                            color: var(--text-glow);
+                            transform: scale(1.2);
+                        }
+                        @keyframes slideInRight {
+                            from {
+                                transform: translateX(100%);
+                                opacity: 0;
+                            }
+                            to {
+                                transform: translateX(0);
+                                opacity: 1;
+                            }
+                        }
+                    `;
+                    document.head.appendChild(styles);
+                }
+                
+                document.body.appendChild(notification);
+                
+                // Auto-remove notification
+                const closeBtn = notification.querySelector('.notification-close');
+                closeBtn.addEventListener('click', () => {
+                    notification.style.animation = 'slideInRight 0.5s ease reverse';
+                    setTimeout(() => notification.remove(), 500);
+                });
+                
+                // Auto-hide after 5 seconds
+                setTimeout(() => {
+                    if (notification.parentNode) {
+                        notification.style.animation = 'slideInRight 0.5s ease reverse';
+                        setTimeout(() => notification.remove(), 500);
+                    }
+                }, 5000);
+            }
+        }
+        
+        // Initialize GitHub OAuth when page loads
+        let githubAuth;
+        document.addEventListener('DOMContentLoaded', () => {
+            githubAuth = new GitHubOAuth();
+        });
+        
         // Console messages
         console.log('%c🚀 HOSKBREW ULTIMATE CYBERPUNK MATRIX ONLINE 🚀', 'color: #00d4ff; font-size: 18px; font-weight: bold; text-shadow: 0 0 10px #00d4ff;');
         console.log('%cCYBERNETIC SYSTEMS: FULLY OPERATIONAL', 'color: #00ff41; font-size: 14px; text-shadow: 0 0 5px #00ff41;');
         console.log('%cNEURAL LINK ESTABLISHED... WELCOME TO THE GRID', 'color: #ff0080; font-size: 14px; text-shadow: 0 0 5px #ff0080;');
+        console.log('%c🔐 GITHUB OAUTH MATRIX: READY FOR AUTHENTICATION', 'color: #b300ff; font-size: 14px; text-shadow: 0 0 5px #b300ff;');
     </script>
 </body>
 </html>

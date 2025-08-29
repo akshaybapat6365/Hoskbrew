@@ -1,0 +1,120 @@
+Uri: http://52.71.178.156/
+File Name: C:\Users\akshay.bapat\Downloads\Hoskbrew\52.71.178.156\index.htm
+Content Type: text/html
+
+Uri: http://52.71.178.156/api/categories?sort=asc&limit=10&parent_id=1
+File Name: C:\Users\akshay.bapat\Downloads\Hoskbrew\52.71.178.156\api\categories
+Content Type: application/json
+
+Uri: http://52.71.178.156/api/products?new=1&sort=asc&limit=10
+File Name: C:\Users\akshay.bapat\Downloads\Hoskbrew\52.71.178.156\api\products
+Content Type: application/json
+
+Uri: http://52.71.178.156/api/products?sort=desc&limit=10
+File Name: C:\Users\akshay.bapat\Downloads\Hoskbrew\52.71.178.156\api\products-2
+Content Type: application/json
+
+Uri: http://52.71.178.156/api/products?sort=desc&limit=10&featured=1
+File Name: C:\Users\akshay.bapat\Downloads\Hoskbrew\52.71.178.156\api\products-1
+Content Type: application/json
+
+Uri: http://52.71.178.156/compare
+File Name: C:\Users\akshay.bapat\Downloads\Hoskbrew\52.71.178.156\compare.htm
+Content Type: text/html
+
+Uri: http://52.71.178.156/contact-us
+File Name: C:\Users\akshay.bapat\Downloads\Hoskbrew\52.71.178.156\contact-us.htm
+Content Type: text/html
+
+Uri: http://52.71.178.156/customer/forgot-password
+File Name: C:\Users\akshay.bapat\Downloads\Hoskbrew\52.71.178.156\customer\forgot-password.htm
+Content Type: text/html
+
+Uri: http://52.71.178.156/customer/login
+File Name: C:\Users\akshay.bapat\Downloads\Hoskbrew\52.71.178.156\customer\login.htm
+Content Type: text/html
+
+Uri: http://52.71.178.156/customer/register
+File Name: C:\Users\akshay.bapat\Downloads\Hoskbrew\52.71.178.156\customer\register.htm
+Content Type: text/html
+
+Uri: http://52.71.178.156/page/about-us
+File Name: C:\Users\akshay.bapat\Downloads\Hoskbrew\52.71.178.156\page\about-us.htm
+Content Type: text/html
+
+Uri: http://52.71.178.156/page/faq
+File Name: C:\Users\akshay.bapat\Downloads\Hoskbrew\52.71.178.156\page\faq.htm
+Content Type: text/html
+
+Uri: http://52.71.178.156/page/terms-and-conditions
+File Name: C:\Users\akshay.bapat\Downloads\Hoskbrew\52.71.178.156\page\terms-and-conditions.htm
+Content Type: text/html
+
+Uri: http://52.71.178.156/page/warranty-claims
+File Name: C:\Users\akshay.bapat\Downloads\Hoskbrew\52.71.178.156\page\warranty-claims.htm
+Content Type: text/html
+
+Uri: http://52.71.178.156/page/warranty-policies
+File Name: C:\Users\akshay.bapat\Downloads\Hoskbrew\52.71.178.156\page\warranty-policies.htm
+Content Type: text/html
+
+Uri: http://52.71.178.156/storage/theme/nwWe8MVADSaz1QG9kT1zFrmW09JcJMqY0jh9LLqr.ico
+File Name: C:\Users\akshay.bapat\Downloads\Hoskbrew\52.71.178.156\storage\theme\nwWe8MVADSaz1QG9kT1zFrmW09JcJMqY0jh9LLqr.ico
+Content Type: image/x-icon
+
+Uri: http://52.71.178.156/storage/theme/ppJ97gCrs7q7OVrFwDCillMDStGjiCdJgzFD0OdH.svg
+File Name: C:\Users\akshay.bapat\Downloads\Hoskbrew\52.71.178.156\storage\theme\ppJ97gCrs7q7OVrFwDCillMDStGjiCdJgzFD0OdH.svg
+Content Type: image/svg+xml
+
+Uri: http://52.71.178.156/themes/shop/default/build/assets/app-05f8acf7.css
+File Name: C:\Users\akshay.bapat\Downloads\Hoskbrew\52.71.178.156\themes\shop\default\build\assets\app-05f8acf7.css
+Content Type: text/css
+
+Uri: http://52.71.178.156/themes/shop/default/build/assets/app-2080e278.css
+File Name: C:\Users\akshay.bapat\Downloads\Hoskbrew\52.71.178.156\themes\shop\default\build\assets\app-2080e278.css
+Content Type: text/css
+
+Uri: http://52.71.178.156/themes/shop/default/build/assets/app-b30607f0.js
+File Name: C:\Users\akshay.bapat\Downloads\Hoskbrew\52.71.178.156\themes\shop\default\build\assets\app-b30607f0.js
+Content Type: application/javascript
+
+Uri: http://52.71.178.156/themes/shop/default/build/assets/bagisto-shop-5afe0d07.woff
+File Name: C:\Users\akshay.bapat\Downloads\Hoskbrew\52.71.178.156\themes\shop\default\build\assets\bagisto-shop-5afe0d07.woff
+Content Type: font/woff
+
+Uri: http://52.71.178.156/themes/shop/default/build/assets/user-placeholder-4670a452.png
+File Name: C:\Users\akshay.bapat\Downloads\Hoskbrew\52.71.178.156\themes\shop\default\build\assets\user-placeholder-4670a452.png
+Content Type: image/png
+
+Uri: https://fonts.googleapis.com/css2?family=DM+Serif+Display&display=swap
+File Name: C:\Users\akshay.bapat\Downloads\Hoskbrew\52.71.178.156\css2-1
+Content Type: text/css
+
+Uri: https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700;800&display=swap
+File Name: C:\Users\akshay.bapat\Downloads\Hoskbrew\52.71.178.156\css2
+Content Type: text/css
+
+Uri: https://fonts.gstatic.com/s/dmserifdisplay/v15/-nFnOHM81r4j6k0gjAW3mujVU2B2K_c.ttf
+File Name: C:\Users\akshay.bapat\Downloads\Hoskbrew\52.71.178.156\s\dmserifdisplay\v15\-nFnOHM81r4j6k0gjAW3mujVU2B2K_c.ttf
+Content Type: font/ttf
+
+Uri: https://fonts.gstatic.com/s/poppins/v22/pxiByp8kv8JHgFVrLCz7V1s.ttf
+File Name: C:\Users\akshay.bapat\Downloads\Hoskbrew\52.71.178.156\s\poppins\v22\pxiByp8kv8JHgFVrLCz7V1s.ttf
+Content Type: font/ttf
+
+Uri: https://fonts.gstatic.com/s/poppins/v22/pxiByp8kv8JHgFVrLDD4V1s.ttf
+File Name: C:\Users\akshay.bapat\Downloads\Hoskbrew\52.71.178.156\s\poppins\v22\pxiByp8kv8JHgFVrLDD4V1s.ttf
+Content Type: font/ttf
+
+Uri: https://fonts.gstatic.com/s/poppins/v22/pxiByp8kv8JHgFVrLEj6V1s.ttf
+File Name: C:\Users\akshay.bapat\Downloads\Hoskbrew\52.71.178.156\s\poppins\v22\pxiByp8kv8JHgFVrLEj6V1s.ttf
+Content Type: font/ttf
+
+Uri: https://fonts.gstatic.com/s/poppins/v22/pxiByp8kv8JHgFVrLGT9V1s.ttf
+File Name: C:\Users\akshay.bapat\Downloads\Hoskbrew\52.71.178.156\s\poppins\v22\pxiByp8kv8JHgFVrLGT9V1s.ttf
+Content Type: font/ttf
+
+Uri: https://fonts.gstatic.com/s/poppins/v22/pxiEyp8kv8JHgFVrFJA.ttf
+File Name: C:\Users\akshay.bapat\Downloads\Hoskbrew\52.71.178.156\s\poppins\v22\pxiEyp8kv8JHgFVrFJA.ttf
+Content Type: font/ttf
+

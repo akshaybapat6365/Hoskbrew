@@ -1,0 +1,600 @@
+﻿<!-- SEO Meta Content -->
+
+<!DOCTYPE html>
+
+<html lang="en" dir="ltr">
+    <head>
+
+        
+
+        <title>Become User</title>
+
+        <meta charset="UTF-8">
+
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta http-equiv="content-language" content="en">
+
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta name="base-url" content="http://52.71.178.156">
+        <meta name="currency" content="{&quot;id&quot;:1,&quot;code&quot;:&quot;USD&quot;,&quot;name&quot;:&quot;United States Dollar&quot;,&quot;symbol&quot;:&quot;$&quot;,&quot;decimal&quot;:2,&quot;group_separator&quot;:&quot;,&quot;,&quot;decimal_separator&quot;:&quot;.&quot;,&quot;currency_position&quot;:null,&quot;created_at&quot;:null,&quot;updated_at&quot;:null}">
+
+            <meta name="description" content="Become User">
+
+    <meta name="keywords" content="Become User">
+
+        <link rel="icon" sizes="16x16" href="../storage/theme/nwWe8MVADSaz1QG9kT1zFrmW09JcJMqY0jh9LLqr.ico">
+
+        <link rel="preload" as="style" href="../themes/shop/default/build/assets/app-2080e278.css"><link rel="preload" as="style" href="../themes/shop/default/build/assets/app-05f8acf7.css"><link rel="modulepreload" href="../themes/shop/default/build/assets/app-b30607f0.js"><link rel="stylesheet" href="../themes/shop/default/build/assets/app-2080e278.css"><link rel="stylesheet" href="../themes/shop/default/build/assets/app-05f8acf7.css"><script type="module" src="../themes/shop/default/build/assets/app-b30607f0.js"></script>
+        <link rel="preload" href="../css2?family=Poppins:wght@400;500;600;700;800&display=swap" as="style">
+        <link rel="stylesheet" href="../css2?family=Poppins:wght@400;500;600;700;800&display=swap">
+
+        <link rel="preload" href="../css2-1?family=DM+Serif+Display&display=swap" as="style">
+        <link rel="stylesheet" href="../css2-1?family=DM+Serif+Display&display=swap">
+
+        
+        <style>
+            
+        </style>
+
+        
+
+    </head>
+
+    <body>
+        
+
+        <a href="#main" class="skip-to-main-content-link">
+            Skip to main content
+        </a>
+
+        <div id="app">
+            <!-- Flash Message Blade Component -->
+            <v-flash-group ref='flashes'></v-flash-group>
+
+
+            <!-- Confirm Modal Blade Component -->
+            <v-modal-confirm ref="confirmModal"></v-modal-confirm>
+
+
+            <!-- Page Header Blade Component -->
+            
+            
+
+            <!-- Page Content Blade Component -->
+            <main id="main" class="bg-white">
+                <!-- Page Title -->
+     
+	<div class="container mt-20 max-1180:px-5 max-md:mt-12">
+        
+
+        <!-- Company Logo -->
+        <div class="flex items-center gap-x-14 max-[1180px]:gap-x-9">
+            <a href="../index.htm" class="m-[0_auto_20px_auto]" aria-label="Bagisto">
+                <img src="../storage/theme/ppJ97gCrs7q7OVrFwDCillMDStGjiCdJgzFD0OdH.svg" alt="Game Console" width="100" height="29">
+            </a>
+        </div>
+
+        
+
+        <!-- Form Container -->
+		<div class="m-auto w-full max-w-[870px] rounded-xl border border-zinc-200 p-16 px-[90px] max-md:px-8 max-md:py-8 max-sm:border-none max-sm:p-0">
+			<h1 class="font-dmserif text-4xl max-md:text-3xl max-sm:text-xl">
+                Become User            </h1>
+
+			<p class="mt-4 text-xl text-zinc-500 max-sm:mt-0 max-sm:text-sm">
+                If you are new to our store, we glad to have you as member.            </p>
+
+            <div class="mt-14 rounded max-sm:mt-8">
+                <!--
+    If a component has the `as` attribute, it indicates that it uses
+    the ajaxified form or some customized slot form.
+-->
+    
+    
+    <v-form method="POST" :initial-errors="[]" v-slot="{ meta, errors }" action="http://52.71.178.156/customer/register">
+                    <input type="hidden" name="_token" value="31WVjPA6pAPXFM8GDZRpsVl3SxDzNLXAvYtJt1nf" autocomplete="off">        
+        
+        <div class="mb-4">
+    <label class="mb-2 block text-base max-sm:text-sm max-sm:mb-1 required">
+    First Name
+</label>
+
+                        <v-field v-slot="{ field, errors }" rules="required" label="First Name" name="first_name">
+            <input type="text" name="first_name" v-bind="field" :class="[errors.length ? 'border !border-red-500 hover:border-red-500' : '']" class="mb-1.5 w-full rounded-lg border px-5 py-3 text-base font-normal text-gray-600 transition-all hover:border-gray-400 focus:border-gray-400 max-sm:px-4 max-md:py-2 max-sm:text-sm px-6 py-4 max-md:py-3 max-sm:py-2" placeholder="First Name" aria-label="First Name" aria-required="true">
+        </v-field>
+        
+                        <v-error-message name="first_name" v-slot="{ message }">
+    <p class="text-red-500 text-xs italic" v-text="message">
+    </p>
+</v-error-message>
+</div>
+
+                    
+
+                    <div class="mb-4">
+    <label class="mb-2 block text-base max-sm:text-sm max-sm:mb-1 required">
+    Last Name
+</label>
+
+                        <v-field v-slot="{ field, errors }" rules="required" label="Last Name" name="last_name">
+            <input type="text" name="last_name" v-bind="field" :class="[errors.length ? 'border !border-red-500 hover:border-red-500' : '']" class="mb-1.5 w-full rounded-lg border px-5 py-3 text-base font-normal text-gray-600 transition-all hover:border-gray-400 focus:border-gray-400 max-sm:px-4 max-md:py-2 max-sm:text-sm px-6 py-4 max-md:py-3 max-sm:py-2" placeholder="Last Name" aria-label="Last Name" aria-required="true">
+        </v-field>
+        
+                        <v-error-message name="last_name" v-slot="{ message }">
+    <p class="text-red-500 text-xs italic" v-text="message">
+    </p>
+</v-error-message>
+</div>
+
+                    
+
+                    <div class="mb-4">
+    <label class="mb-2 block text-base max-sm:text-sm max-sm:mb-1 required">
+    Email
+</label>
+
+                        <v-field v-slot="{ field, errors }" rules="required|email" label="Email" name="email">
+            <input type="email" name="email" v-bind="field" :class="[errors.length ? 'border !border-red-500 hover:border-red-500' : '']" class="mb-1.5 w-full rounded-lg border px-5 py-3 text-base font-normal text-gray-600 transition-all hover:border-gray-400 focus:border-gray-400 max-sm:px-4 max-md:py-2 max-sm:text-sm px-6 py-4 max-md:py-3 max-sm:py-2" placeholder="email@example.com" aria-label="Email" aria-required="true">
+        </v-field>
+        
+                        <v-error-message name="email" v-slot="{ message }">
+    <p class="text-red-500 text-xs italic" v-text="message">
+    </p>
+</v-error-message>
+</div>
+
+                    
+
+                    <div class="mb-4 mb-6">
+    <label class="mb-2 block text-base max-sm:text-sm max-sm:mb-1 required">
+    Password
+</label>
+
+                        <v-field v-slot="{ field, errors }" rules="required|min:6" label="Password" name="password">
+            <input type="password" name="password" v-bind="field" :class="[errors.length ? 'border !border-red-500 hover:border-red-500' : '']" class="mb-1.5 w-full rounded-lg border px-5 py-3 text-base font-normal text-gray-600 transition-all hover:border-gray-400 focus:border-gray-400 max-sm:px-4 max-md:py-2 max-sm:text-sm px-6 py-4 max-md:py-3 max-sm:py-2" placeholder="Password" ref="password" aria-label="Password" aria-required="true">
+        </v-field>
+        
+                        <v-error-message name="password" v-slot="{ message }">
+    <p class="text-red-500 text-xs italic" v-text="message">
+    </p>
+</v-error-message>
+</div>
+
+                    
+
+                    <div class="mb-4">
+    <label class="mb-2 block text-base max-sm:text-sm max-sm:mb-1">
+    Confirm Password
+</label>
+
+                        <v-field v-slot="{ field, errors }" rules="confirmed:@password" value="" label="Password" name="password_confirmation">
+            <input type="password" name="password_confirmation" v-bind="field" :class="[errors.length ? 'border !border-red-500 hover:border-red-500' : '']" class="mb-1.5 w-full rounded-lg border px-5 py-3 text-base font-normal text-gray-600 transition-all hover:border-gray-400 focus:border-gray-400 max-sm:px-4 max-md:py-2 max-sm:text-sm px-6 py-4 max-md:py-3 max-sm:py-2" placeholder="Confirm Password" aria-label="Confirm Password" aria-required="true">
+        </v-field>
+        
+                        <v-error-message name="password_confirmation" v-slot="{ message }">
+    <p class="text-red-500 text-xs italic" v-text="message">
+    </p>
+</v-error-message>
+</div>
+
+                    
+
+                    
+                    
+                    
+
+                    <div class="mt-8 flex flex-wrap items-center gap-9 max-sm:justify-center max-sm:gap-5">
+                        <button class="primary-button m-0 mx-auto block w-full max-w-[374px] rounded-2xl px-11 py-4 text-center text-base max-md:max-w-full max-md:rounded-lg max-md:py-3 max-sm:py-1.5 ltr:ml-0 rtl:mr-0" type="submit">
+                            Register                        </button>
+
+                        <div class="flex flex-wrap gap-4">
+                            <div class="flex gap-3">
+                                                                                                        </div>
+                        </div>
+                    </div>
+    </v-form>
+            </div>
+
+			<p class="mt-5 font-medium text-zinc-500 max-sm:text-center max-sm:text-sm">
+                Already have an account ?
+                <a class="text-navyBlue" href="login.htm">
+                    Sign In                </a>
+            </p>
+		</div>
+
+        <p class="mb-4 mt-8 text-center text-xs text-zinc-500">
+            © Copyright 2010 - 2025, Webkul Software (Registered in India). All rights reserved.        </p>
+	</div>
+            </main>
+
+            
+
+
+            <!-- Page Services Blade Component -->
+            
+            <!-- Page Footer Blade Component -->
+                    </div>
+
+        <style>
+    .path-hint {
+        border: solid 1px transparent;
+        padding: 1px;
+    }
+
+    .path-hint:hover {
+        border: 1px solid red;
+    }
+
+    .path-hint-tooltip {
+        padding: 0px 10px;
+        position: absolute;
+        background: #000000;
+        z-index: 10000;
+        color: #fff;
+        font-size: 10px;
+    }
+
+    .path-hint-tooltip h4 {
+        margin-top: 5px;
+        margin-bottom: 3px;
+        color: #fff;
+        font-size: 12px;
+    }
+
+    .path-hint-tooltip ul li {
+        margin-bottom: 3px;
+    }
+
+    .main-container-wrapper .product-card .product-image img {
+        max-width: 100%;
+        height: 260px;
+        object-fit: cover;
+    }
+</style>
+
+
+                
+        <script type="text/x-template" id="v-flash-item-template">
+        <div
+            class="flex w-max max-w-[408px] justify-between gap-12 rounded-lg px-5 py-3 max-sm:max-w-80 max-sm:items-center max-sm:gap-2 max-sm:p-3"
+            :style="typeStyles[flash.type]['container']"
+        >
+            <p
+                class="flex items-center break-words text-sm"
+                :style="typeStyles[flash.type]['message']"
+            >
+                <span
+                    class="icon-toast-done text-2xl ltr:mr-2.5 rtl:ml-2.5"
+                    :class="iconClasses[flash.type]"
+                    :style="typeStyles[flash.type]['icon']"
+                ></span>
+
+                {{ flash.message }}
+            </p>
+
+			<span
+                class="icon-cancel max-h-4 max-w-4 cursor-pointer"
+                :style="typeStyles[flash.type]['icon']"
+                @click="remove"
+            ></span>
+        </div>
+    </script>
+
+    <script type="module">
+        app.component('v-flash-item', {
+            template: '#v-flash-item-template',
+
+            props: ['flash'],
+
+            data() {
+                return {
+                    iconClasses: {
+                        success: 'icon-toast-done',
+
+                        error: 'icon-toast-error',
+
+                        warning: 'icon-toast-exclamation-mark',
+
+                        info: 'icon-toast-info',
+                    },
+
+                    typeStyles: {
+                        success: {
+                            container: 'background: #D4EDDA',
+
+                            message: 'color: #155721',
+
+                            icon: 'color: #155721'
+                        },
+
+                        error: {
+                            container: 'background: #F8D7DA',
+
+                            message: 'color: #721C24',
+
+                            icon: 'color: #721C24'
+                        },
+
+                        warning: {
+                            container: 'background: #FFF3CD',
+
+                            message: 'color: #856404',
+
+                            icon: 'color: #856404'
+                        },
+
+                        info: {
+                            container: 'background: #E2E3E5',
+
+                            message: 'color: #383D41',
+
+                            icon: 'color: #383D41'
+                        },
+                    },
+                };
+            },
+
+            created() {
+                var self = this;
+
+                setTimeout(function() {
+                    self.remove()
+                }, 5000)
+            },
+
+            methods: {
+                remove() {
+                    this.$emit('onRemove', this.flash)
+                }
+            }
+        });
+    </script>
+    <script type="text/x-template" id="v-flash-group-template">
+        <transition-group
+            tag='div'
+            name="flash-group"
+            enter-from-class="ltr:translate-x-full rtl:-translate-x-full"
+            enter-active-class="transform transition duration-200 ease-in-out"
+            enter-to-class="ltr:translate-x-0 rtl:-translate-x-0"
+            leave-from-class="ltr:translate-x-0 rtl:-translate-x-0"
+            leave-active-class="transform transition duration-200 ease-in-out"
+            leave-to-class="ltr:translate-x-full rtl:-translate-x-full"
+            class='fixed top-5 z-[1001] grid justify-items-end gap-2.5 max-sm:hidden ltr:right-5 rtl:left-5'
+        >
+            <v-flash-item
+    v-for='flash in flashes'
+    :key='flash.uid'
+    :flash="flash"
+    @onRemove="remove($event)"
+/>
+
+        </transition-group>
+
+        <transition-group
+            tag='div'
+            name="flash-group"
+            enter-from-class="ltr:translate-y-full rtl:-translate-y-full"
+            enter-active-class="transform transition duration-200 ease-in-out"
+            enter-to-class="ltr:translate-y-0 rtl:-translate-y-0"
+            leave-from-class="ltr:translate-y-0 rtl:-translate-y-0"
+            leave-active-class="transform transition duration-200 ease-in-out"
+            leave-to-class="ltr:translate-y-full rtl:-translate-y-full"
+            class='fixed bottom-10 left-1/2 z-[1001] grid -translate-x-1/2 -translate-y-1/2 transform justify-items-center gap-2.5 sm:hidden'
+        >
+            <v-flash-item
+    v-for='flash in flashes'
+    :key='flash.uid'
+    :flash="flash"
+    @onRemove="remove($event)"
+/>
+
+        </transition-group>
+    </script>
+
+    <script type="module">
+        app.component('v-flash-group', {
+            template: '#v-flash-group-template',
+
+            data() {
+                return {
+                    uid: 0,
+
+                    flashes: []
+                }
+            },
+
+            created() {
+                                                                                                                                                                
+                this.registerGlobalEvents();
+            },
+
+            methods: {
+                add(flash) {
+                    flash.uid = this.uid++;
+
+                    this.flashes.push(flash);
+                },
+
+                remove(flash) {
+                    let index = this.flashes.indexOf(flash);
+
+                    this.flashes.splice(index, 1);
+                },
+
+                registerGlobalEvents() {
+                    this.$emitter.on('add-flash', this.add);
+                },
+            }
+        });
+    </script>
+    <script type="text/x-template" id="v-modal-confirm-template">
+        <div>
+            <transition
+                tag="div"
+                name="modal-overlay"
+                enter-class="duration-300 ease-out"
+                enter-from-class="opacity-0"
+                enter-to-class="opacity-100"
+                leave-class="duration-200 ease-in"
+                leave-from-class="opacity-100"
+                leave-to-class="opacity-0"
+            >
+                <div
+                    class="fixed inset-0 z-20 bg-gray-500 bg-opacity-50 transition-opacity"
+                    v-show="isOpen"
+                ></div>
+            </transition>
+
+            <transition
+                tag="div"
+                name="modal-content"
+                enter-class="duration-300 ease-out"
+                enter-from-class="translate-y-4 opacity-0 md:translate-y-0 md:scale-95"
+                enter-to-class="translate-y-0 opacity-100 md:scale-100"
+                leave-class="duration-200 ease-in"
+                leave-from-class="translate-y-0 opacity-100 md:scale-100"
+                leave-to-class="translate-y-4 opacity-0 md:translate-y-0 md:scale-95"
+            >
+                <div
+                    class="fixed inset-0 z-20 transform overflow-y-auto transition" v-show="isOpen"
+                >
+                    <div class="flex min-h-full items-end justify-center p-4 text-center sm:items-center sm:p-0">
+                        <div class="absolute left-1/2 top-1/2 z-[999] w-full max-w-[475px] -translate-x-1/2 -translate-y-1/2 overflow-hidden rounded-xl bg-white p-5 max-md:w-[90%] max-sm:p-4">
+                            <div class="flex gap-2.5">
+                                <div>
+                                    <span class="flex rounded-full border border-gray-300 p-2.5">
+                                        <i class="icon-error text-3xl max-sm:text-xl"></i>
+                                    </span>
+                                </div>
+
+                                <div>
+                                    <div class="flex items-center justify-between gap-5 text-xl max-sm:text-lg">
+                                        {{ title }}
+                                    </div>
+
+                                    <div class="pb-5 pt-1.5 text-left text-sm text-gray-500">
+                                        {{ message }}
+                                    </div>
+
+                                    <div class="flex justify-end gap-2.5">
+                                        <button
+                                            type="button"
+                                            class="secondary-button max-md:py-3 max-sm:px-6 max-sm:py-2.5"
+                                            @click="disagree"
+                                        >
+                                            {{ options.btnDisagree }}
+                                        </button>
+
+                                        <button
+                                            type="button"
+                                            class="primary-button max-md:py-3 max-sm:px-6 max-sm:py-2.5"
+                                            @click="agree"
+                                        >
+                                            {{ options.btnAgree }} 
+                                        </button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </transition>
+        </div>
+    </script>
+
+    <script type="module">
+        app.component('v-modal-confirm', {
+            template: '#v-modal-confirm-template',
+
+            data() {
+                return {
+                    isOpen: false,
+
+                    title: '',
+
+                    message: '',
+
+                    options: {
+                        btnDisagree: '',
+                        btnAgree: '',
+                    },
+
+                    agreeCallback: null,
+
+                    disagreeCallback: null,
+                };
+            },
+
+            created() {
+                this.registerGlobalEvents();
+            },
+
+            methods: {
+                open({
+                    title = "Are you sure?",
+                    message = "Are you sure you want to perform this action?",
+                    options = {
+                        btnDisagree: "Disagree",
+                        btnAgree: "Agree",
+                    },
+                    agree = () => {},
+                    disagree = () => {},
+                }) {
+                    this.isOpen = true;
+
+                    document.body.style.overflow = 'hidden';
+
+                    this.title = title;
+
+                    this.message = message;
+
+                    this.options = options;
+
+                    this.agreeCallback = agree;
+
+                    this.disagreeCallback = disagree;
+                },
+
+                disagree() {
+                    this.isOpen = false;
+
+                    document.body.style.overflow = 'auto';
+
+                    this.disagreeCallback();
+                },
+
+                agree() {
+                    this.isOpen = false;
+
+                    document.body.style.overflow = 'auto';
+
+                    this.agreeCallback();
+                },
+
+                registerGlobalEvents() {
+                    this.$emitter.on('open-confirm-modal', this.open);
+                },
+            }
+        });
+    </script>
+
+        
+        <script>
+            /**
+             * Load event, the purpose of using the event is to mount the application
+             * after all of our `Vue` components which is present in blade file have
+             * been registered in the app. No matter what `app.mount()` should be
+             * called in the last.
+             */
+            window.addEventListener("load", function (event) {
+                app.mount("#app");
+            });
+        </script>
+
+        
+
+        <script type="text/javascript">
+            
+        </script>
+    </body>
+</html>
