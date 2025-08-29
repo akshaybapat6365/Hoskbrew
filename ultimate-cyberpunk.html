@@ -20,18 +20,21 @@
     
     <style>
         :root {
-            /* Professional Cyberpunk Colors - Toned Down */
-            --neon-blue: #4A9EFF;
-            --neon-pink: #E91E63;
-            --neon-green: #4CAF50;
-            --neon-purple: #9C27B0;
-            --neon-orange: #FF7043;
-            --neon-yellow: #FDD835;
-            --dark-bg: #0D1117;
-            --dark-surface: #161B22;
-            --text-glow: #F0F6FC;
-            --text-secondary: #8B949E;
-            --border-color: #30363D;
+            /* Gaming Cyberpunk Colors - Edgy & Futuristic */
+            --neon-blue: #00D4FF;
+            --neon-cyan: #00FFFF;
+            --neon-orange: #FF6600;
+            --neon-red: #FF0040;
+            --neon-white: #FFFFFF;
+            --neon-green: #00FF88;
+            --dark-bg: #000000;
+            --dark-surface: #0A0A0F;
+            --dark-card: #111118;
+            --text-glow: #FFFFFF;
+            --text-secondary: #B0B0B0;
+            --border-color: #222;
+            --accent-primary: #00D4FF;
+            --accent-secondary: #FF6600;
         }
         
         * {
@@ -45,34 +48,10 @@
             background: var(--dark-bg);
             color: var(--text-glow);
             overflow-x: hidden;
-            cursor: none;
+            cursor: default;
             position: relative;
         }
         
-        /* Custom Cursor System */
-        .cursor-main {
-            position: fixed;
-            width: 20px;
-            height: 20px;
-            background: radial-gradient(circle, var(--neon-blue) 0%, transparent 70%);
-            border-radius: 50%;
-            pointer-events: none;
-            z-index: 10000;
-            mix-blend-mode: screen;
-            transition: transform 0.1s ease;
-        }
-        
-        .cursor-trail {
-            position: fixed;
-            width: 6px;
-            height: 6px;
-            background: var(--neon-pink);
-            border-radius: 50%;
-            pointer-events: none;
-            z-index: 9999;
-            opacity: 0.8;
-            box-shadow: 0 0 15px var(--neon-pink);
-        }
         
         /* Holographic Background - Toned Down */
         .holo-bg {
@@ -707,6 +686,39 @@
             font-size: 1.1rem;
         }
         
+        /* Hardware List Styling */
+        .hardware-list {
+            text-align: left;
+            margin: 1rem 0;
+        }
+        
+        .hw-item {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 0.4rem 0;
+            border-bottom: 1px solid rgba(0, 212, 255, 0.1);
+            transition: all 0.3s ease;
+        }
+        
+        .hw-item:hover {
+            background: rgba(0, 212, 255, 0.05);
+            padding-left: 0.5rem;
+            border-left: 2px solid var(--neon-blue);
+        }
+        
+        .hw-name {
+            color: var(--text-glow);
+            font-size: 0.9rem;
+            font-weight: 500;
+        }
+        
+        .hw-price {
+            color: var(--neon-green);
+            font-weight: 700;
+            text-shadow: 0 0 10px var(--neon-green);
+        }
+        
         /* Floating Orbs */
         .orb {
             position: absolute;
@@ -818,8 +830,6 @@
         </div>
     </div>
     
-    <!-- Custom Cursor -->
-    <div class="cursor-main" id="cursor"></div>
     
     <!-- Background Effects -->
     <div class="holo-bg"></div>
@@ -827,10 +837,6 @@
     <div class="cyber-grid"></div>
     <div class="scanlines"></div>
     
-    <!-- Floating Live Link -->
-    <a href="https://akshaybapat6365.github.io/Hoskbrew-/ultimate-cyberpunk.html" target="_blank" class="floating-live-btn" title="Access Live Cyberpunk Matrix">
-        LIVE MATRIX
-    </a>
     
     <!-- Floating Orbs - Reduced and Professional -->
     <div class="orb" style="width: 6px; height: 6px; background: radial-gradient(circle, var(--neon-blue), transparent); left: 20%; animation-delay: 0s; opacity: 0.4;"></div>
@@ -841,12 +847,12 @@
         <div class="nav-container">
             <div class="logo">HOSKBREW</div>
             <ul class="nav-links">
-                <li><a href="#home">SYSTEM</a></li>
-                <li><a href="#services">MODULES</a></li>
+                <li><a href="#home">HOME</a></li>
+                <li><a href="#services">SERVICES</a></li>
                 <li><a href="#products">HARDWARE</a></li>
-                <li><a href="#about">PROTOCOL</a></li>
-                <li><a href="#contact">INTERFACE</a></li>
-                <li><button id="github-login-btn" class="github-oauth-btn">GitHub Auth</button></li>
+                <li><a href="#about">ABOUT</a></li>
+                <li><a href="#contact">CONTACT</a></li>
+                <li><button id="github-login-btn" class="github-oauth-btn">GitHub</button></li>
                 <li><div id="user-profile" class="user-profile" style="display: none;"></div></li>
             </ul>
         </div>
@@ -894,28 +900,113 @@
         </div>
     </section>
     
-    <!-- Products Section -->
+    <!-- Hardware Catalog Section -->
     <section class="holo-section" id="products">
         <div class="holo-container">
-            <h2 class="section-title">HARDWARE CATALOG</h2>
+            <h2 class="section-title">HARDWARE ARCHIVE</h2>
             <div class="holo-grid">
+                <!-- Nintendo Systems -->
                 <div class="holo-card">
-                    <div class="holo-icon" style="color: var(--neon-orange);">🕹️</div>
-                    <h3 class="holo-title">NINTENDO ARCHIVE</h3>
-                    <p class="holo-text">NES • SNES • N64 • GameCube<br/>Legendary combat units restored with military-grade cybernetic enhancements. Each system undergoes complete neural reconstruction and combat readiness protocols.</p>
-                    <a href="#" class="cyber-btn" style="margin-top: 2rem; font-size: 0.9rem;">ACCESS ARCHIVE</a>
+                    <div class="holo-icon" style="color: var(--neon-red);">🎮</div>
+                    <h3 class="holo-title">NINTENDO SYSTEMS</h3>
+                    <div class="holo-text">
+                        <div class="hardware-list">
+                            <div class="hw-item"><span class="hw-name">NES (Famicom)</span> - <span class="hw-price">$149.99</span></div>
+                            <div class="hw-item"><span class="hw-name">SNES (Super Famicom)</span> - <span class="hw-price">$199.99</span></div>
+                            <div class="hw-item"><span class="hw-name">Nintendo 64</span> - <span class="hw-price">$229.99</span></div>
+                            <div class="hw-item"><span class="hw-name">GameCube</span> - <span class="hw-price">$179.99</span></div>
+                            <div class="hw-item"><span class="hw-name">Game Boy Classic</span> - <span class="hw-price">$89.99</span></div>
+                            <div class="hw-item"><span class="hw-name">Game Boy Color</span> - <span class="hw-price">$119.99</span></div>
+                            <div class="hw-item"><span class="hw-name">Game Boy Advance</span> - <span class="hw-price">$139.99</span></div>
+                        </div>
+                    </div>
+                    <a href="#nintendo" class="cyber-btn" style="margin-top: 2rem; font-size: 0.9rem;">VIEW CATALOG</a>
                 </div>
+
+                <!-- SEGA Systems -->
                 <div class="holo-card">
-                    <div class="holo-icon" style="color: var(--neon-yellow);">🎯</div>
-                    <h3 class="holo-title">SEGA PROTOCOL</h3>
-                    <p class="holo-text">Genesis • Saturn • Dreamcast<br/>Blast processing enhanced with quantum acceleration cores. Each unit equipped with advanced AI combat protocols and arcade-perfect neural interfaces.</p>
-                    <a href="#" class="cyber-btn secondary" style="margin-top: 2rem; font-size: 0.9rem;">LOAD PROTOCOL</a>
+                    <div class="holo-icon" style="color: var(--neon-blue);">🕹️</div>
+                    <h3 class="holo-title">SEGA SYSTEMS</h3>
+                    <div class="holo-text">
+                        <div class="hardware-list">
+                            <div class="hw-item"><span class="hw-name">Sega Genesis/Mega Drive</span> - <span class="hw-price">$169.99</span></div>
+                            <div class="hw-item"><span class="hw-name">Sega Saturn</span> - <span class="hw-price">$299.99</span></div>
+                            <div class="hw-item"><span class="hw-name">Sega Dreamcast</span> - <span class="hw-price">$199.99</span></div>
+                            <div class="hw-item"><span class="hw-name">Sega Master System</span> - <span class="hw-price">$129.99</span></div>
+                            <div class="hw-item"><span class="hw-name">Sega Game Gear</span> - <span class="hw-price">$149.99</span></div>
+                            <div class="hw-item"><span class="hw-name">Sega 32X</span> - <span class="hw-price">$189.99</span></div>
+                            <div class="hw-item"><span class="hw-name">Sega CD</span> - <span class="hw-price">$249.99</span></div>
+                        </div>
+                    </div>
+                    <a href="#sega" class="cyber-btn secondary" style="margin-top: 2rem; font-size: 0.9rem;">VIEW CATALOG</a>
                 </div>
+
+                <!-- PlayStation Systems -->
                 <div class="holo-card">
-                    <div class="holo-icon" style="color: var(--neon-green);">🛡️</div>
-                    <h3 class="holo-title">REPAIR MATRIX</h3>
-                    <p class="holo-text">Neural Restoration Services<br/>From surface-level cleaning to deep-core motherboard resurrection. Our cyber-surgeons utilize advanced quantum diagnostic arrays.</p>
-                    <a href="#" class="cyber-btn accent" style="margin-top: 2rem; font-size: 0.9rem;">INITIATE REPAIR</a>
+                    <div class="holo-icon" style="color: var(--neon-cyan);">🎯</div>
+                    <h3 class="holo-title">PLAYSTATION SYSTEMS</h3>
+                    <div class="holo-text">
+                        <div class="hardware-list">
+                            <div class="hw-item"><span class="hw-name">PlayStation 1 (PSX)</span> - <span class="hw-price">$179.99</span></div>
+                            <div class="hw-item"><span class="hw-name">PlayStation 2</span> - <span class="hw-price">$199.99</span></div>
+                            <div class="hw-item"><span class="hw-name">PlayStation Portable (PSP)</span> - <span class="hw-price">$159.99</span></div>
+                            <div class="hw-item"><span class="hw-name">PS1 LCD Screen Mod</span> - <span class="hw-price">$89.99</span></div>
+                            <div class="hw-item"><span class="hw-name">PS2 HDD Adapter</span> - <span class="hw-price">$49.99</span></div>
+                            <div class="hw-item"><span class="hw-name">Memory Cards (8MB)</span> - <span class="hw-price">$19.99</span></div>
+                        </div>
+                    </div>
+                    <a href="#playstation" class="cyber-btn accent" style="margin-top: 2rem; font-size: 0.9rem;">VIEW CATALOG</a>
+                </div>
+
+                <!-- Atari Systems -->
+                <div class="holo-card">
+                    <div class="holo-icon" style="color: var(--neon-orange);">👾</div>
+                    <h3 class="holo-title">ATARI SYSTEMS</h3>
+                    <div class="holo-text">
+                        <div class="hardware-list">
+                            <div class="hw-item"><span class="hw-name">Atari 2600</span> - <span class="hw-price">$149.99</span></div>
+                            <div class="hw-item"><span class="hw-name">Atari 5200</span> - <span class="hw-price">$199.99</span></div>
+                            <div class="hw-item"><span class="hw-name">Atari 7800</span> - <span class="hw-price">$179.99</span></div>
+                            <div class="hw-item"><span class="hw-name">Atari Lynx</span> - <span class="hw-price">$169.99</span></div>
+                            <div class="hw-item"><span class="hw-name">Atari Jaguar</span> - <span class="hw-price">$399.99</span></div>
+                            <div class="hw-item"><span class="hw-name">Atari ST Computer</span> - <span class="hw-price">$299.99</span></div>
+                        </div>
+                    </div>
+                    <a href="#atari" class="cyber-btn" style="margin-top: 2rem; font-size: 0.9rem; color: var(--neon-orange);">VIEW CATALOG</a>
+                </div>
+
+                <!-- Custom Parts & Repairs -->
+                <div class="holo-card">
+                    <div class="holo-icon" style="color: var(--neon-green);">⚡</div>
+                    <h3 class="holo-title">CUSTOM PARTS & REPAIRS</h3>
+                    <div class="holo-text">
+                        <div class="hardware-list">
+                            <div class="hw-item"><span class="hw-name">Console Refurbishment</span> - <span class="hw-price">$79.99+</span></div>
+                            <div class="hw-item"><span class="hw-name">Capacitor Replacement</span> - <span class="hw-price">$39.99</span></div>
+                            <div class="hw-item"><span class="hw-name">Laser Lens Cleaning</span> - <span class="hw-price">$29.99</span></div>
+                            <div class="hw-item"><span class="hw-name">Custom 3D Printed Parts</span> - <span class="hw-price">$15.99+</span></div>
+                            <div class="hw-item"><span class="hw-name">RGB/HDMI Mods</span> - <span class="hw-price">$149.99+</span></div>
+                            <div class="hw-item"><span class="hw-name">Region Modification</span> - <span class="hw-price">$59.99</span></div>
+                        </div>
+                    </div>
+                    <a href="#repairs" class="cyber-btn" style="margin-top: 2rem; font-size: 0.9rem; color: var(--neon-green);">GET QUOTE</a>
+                </div>
+
+                <!-- Rare Games Collection -->
+                <div class="holo-card">
+                    <div class="holo-icon" style="color: var(--neon-white);">💿</div>
+                    <h3 class="holo-title">RARE GAMES ARCHIVE</h3>
+                    <div class="holo-text">
+                        <div class="hardware-list">
+                            <div class="hw-item"><span class="hw-name">CIB Nintendo Games</span> - <span class="hw-price">$39.99+</span></div>
+                            <div class="hw-item"><span class="hw-name">Sega Genesis Classics</span> - <span class="hw-price">$24.99+</span></div>
+                            <div class="hw-item"><span class="hw-name">PS1 RPG Collection</span> - <span class="hw-price">$49.99+</span></div>
+                            <div class="hw-item"><span class="hw-name">Limited Editions</span> - <span class="hw-price">$99.99+</span></div>
+                            <div class="hw-item"><span class="hw-name">Japanese Imports</span> - <span class="hw-price">$59.99+</span></div>
+                            <div class="hw-item"><span class="hw-name">Homebrew Games</span> - <span class="hw-price">$29.99+</span></div>
+                        </div>
+                    </div>
+                    <a href="#games" class="cyber-btn secondary" style="margin-top: 2rem; font-size: 0.9rem;">BROWSE GAMES</a>
                 </div>
             </div>
         </div>
@@ -950,6 +1041,46 @@
         </div>
     </section>
     
+    <!-- Contact Section -->
+    <section class="holo-section" id="contact">
+        <div class="holo-container">
+            <h2 class="section-title">CONTACT MATRIX</h2>
+            <div class="holo-card" style="max-width: 800px; margin: 0 auto; text-align: center; padding: 4rem;">
+                <div class="holo-icon" style="color: var(--neon-cyan); font-size: 5rem;">📡</div>
+                <h3 class="holo-title" style="font-size: 2.5rem; margin-bottom: 2rem;">ESTABLISH CONNECTION</h3>
+                <p class="holo-text" style="font-size: 1.2rem; line-height: 2; margin-bottom: 3rem;">
+                    Ready to upgrade your retro gaming setup? Our cybernetic technicians are standing by to assist with repairs, 
+                    custom builds, and rare hardware acquisitions. Connect with the HOSKBREW network.
+                </p>
+                
+                <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 2rem; margin: 3rem 0;">
+                    <div class="contact-method">
+                        <div style="font-size: 3rem; color: var(--neon-blue); margin-bottom: 1rem;">📧</div>
+                        <h4 style="color: var(--neon-blue); margin-bottom: 0.5rem;">EMAIL PROTOCOL</h4>
+                        <p style="color: var(--text-secondary); font-family: 'Share Tech Mono', monospace;">contact@hoskbrew.com</p>
+                    </div>
+                    
+                    <div class="contact-method">
+                        <div style="font-size: 3rem; color: var(--neon-green); margin-bottom: 1rem;">💬</div>
+                        <h4 style="color: var(--neon-green); margin-bottom: 0.5rem;">LIVE CHAT</h4>
+                        <p style="color: var(--text-secondary); font-family: 'Share Tech Mono', monospace;">24/7 Support Available</p>
+                    </div>
+                    
+                    <div class="contact-method">
+                        <div style="font-size: 3rem; color: var(--neon-orange); margin-bottom: 1rem;">🔧</div>
+                        <h4 style="color: var(--neon-orange); margin-bottom: 0.5rem;">REPAIR REQUESTS</h4>
+                        <p style="color: var(--text-secondary); font-family: 'Share Tech Mono', monospace;">Free Diagnostics</p>
+                    </div>
+                </div>
+                
+                <div style="display: flex; gap: 2rem; justify-content: center; flex-wrap: wrap; margin-top: 3rem;">
+                    <a href="mailto:contact@hoskbrew.com" class="cyber-btn" style="font-size: 1.1rem; padding: 1.5rem 4rem;">SEND MESSAGE</a>
+                    <a href="#products" class="cyber-btn secondary" style="font-size: 1.1rem; padding: 1.5rem 4rem;">VIEW CATALOG</a>
+                </div>
+            </div>
+        </div>
+    </section>
+    
     <script>
         // Loading Screen with Progress
         let loadingProgress = 0;
@@ -968,44 +1099,12 @@
             }
         }, 200);
         
-        // Enhanced Cursor System
-        const cursor = document.getElementById('cursor');
-        const trail = [];
+        // Mouse tracking for particle system only
         let mouseX = 0, mouseY = 0;
         
         document.addEventListener('mousemove', (e) => {
             mouseX = e.clientX;
             mouseY = e.clientY;
-            
-            cursor.style.left = mouseX - 10 + 'px';
-            cursor.style.top = mouseY - 10 + 'px';
-            
-            // Advanced trail with color cycling
-            const trailElement = document.createElement('div');
-            trailElement.className = 'cursor-trail';
-            trailElement.style.left = mouseX - 3 + 'px';
-            trailElement.style.top = mouseY - 3 + 'px';
-            
-            const colors = ['var(--neon-blue)', 'var(--neon-pink)', 'var(--neon-green)', 'var(--neon-purple)'];
-            const randomColor = colors[Math.floor(Math.random() * colors.length)];
-            trailElement.style.background = randomColor;
-            trailElement.style.boxShadow = `0 0 15px ${randomColor}`;
-            
-            document.body.appendChild(trailElement);
-            trail.push(trailElement);
-            
-            if (trail.length > 8) {
-                const oldTrail = trail.shift();
-                oldTrail.remove();
-            }
-            
-            // Enhanced trail animation
-            trail.forEach((element, index) => {
-                const opacity = (index + 1) / trail.length;
-                const scale = opacity;
-                element.style.opacity = opacity;
-                element.style.transform = `scale(${scale})`;
-            });
         });
         
         // Three.js Particle System
@@ -1026,10 +1125,12 @@
             const sizes = new Float32Array(particleCount);
             
             const colorPalette = [
-                new THREE.Color(0x4A9EFF), // Professional Blue
-                new THREE.Color(0xE91E63), // Professional Pink  
-                new THREE.Color(0x4CAF50), // Professional Green
-                new THREE.Color(0x9C27B0), // Professional Purple
+                new THREE.Color(0x00D4FF), // Gaming Blue
+                new THREE.Color(0x00FFFF), // Gaming Cyan
+                new THREE.Color(0xFF6600), // Gaming Orange  
+                new THREE.Color(0x00FF88), // Gaming Green
+                new THREE.Color(0xFF0040), // Gaming Red
+                new THREE.Color(0xFFFFFF), // Gaming White
             ];
             
             for (let i = 0; i < particleCount; i++) {
