@@ -1,0 +1,906 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>HOSKBREW - Cyberpunk Gaming Matrix</title>
+    
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;500;600;700;800;900&family=Rajdhani:wght@300;400;500;600;700&family=Share+Tech+Mono&display=swap" rel="stylesheet">
+    
+    <!-- Three.js and Libraries -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/dat-gui/0.7.9/dat.gui.min.js"></script>
+    
+    <style>
+        :root {
+            --cyber-primary: #00ffff;
+            --cyber-secondary: #ff0080;
+            --cyber-tertiary: #ffff00;
+            --cyber-accent: #ff6600;
+            --cyber-green: #00ff41;
+            --cyber-purple: #b300ff;
+            --cyber-blue: #0080ff;
+            --bg-deep: #000000;
+            --bg-dark: #0a0a0f;
+            --bg-surface: #1a1a2e;
+            --text-primary: #ffffff;
+            --text-glow: #00ffff;
+            --grid-color: rgba(0, 255, 255, 0.3);
+        }
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Rajdhani', sans-serif;
+            background: var(--bg-deep);
+            color: var(--text-primary);
+            overflow-x: hidden;
+            cursor: none;
+        }
+        
+        /* Custom Cursor */
+        .cursor {
+            position: fixed;
+            width: 20px;
+            height: 20px;
+            background: radial-gradient(circle, var(--cyber-primary) 0%, transparent 70%);
+            border-radius: 50%;
+            pointer-events: none;
+            z-index: 10000;
+            mix-blend-mode: screen;
+            transition: transform 0.1s ease;
+        }
+        
+        .cursor-trail {
+            position: fixed;
+            width: 4px;
+            height: 4px;
+            background: var(--cyber-secondary);
+            border-radius: 50%;
+            pointer-events: none;
+            z-index: 9999;
+            opacity: 0.8;
+            box-shadow: 0 0 10px var(--cyber-secondary);
+        }
+        
+        /* Three.js Background Container */
+        #threejs-bg {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: -1;
+        }
+        
+        /* Holographic Grid Overlay */
+        .holo-grid {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-image: 
+                linear-gradient(var(--grid-color) 1px, transparent 1px),
+                linear-gradient(90deg, var(--grid-color) 1px, transparent 1px);
+            background-size: 50px 50px;
+            pointer-events: none;
+            z-index: 1;
+            opacity: 0.4;
+            animation: gridPulse 4s ease-in-out infinite;
+        }
+        
+        @keyframes gridPulse {
+            0%, 100% { opacity: 0.2; }
+            50% { opacity: 0.6; }
+        }
+        
+        /* Scanlines Effect */
+        .scanlines {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(
+                transparent 50%,
+                rgba(0, 255, 255, 0.03) 50%
+            );
+            background-size: 100% 4px;
+            pointer-events: none;
+            z-index: 2;
+            animation: scanlines 0.1s linear infinite;
+        }
+        
+        @keyframes scanlines {
+            0% { transform: translateY(0); }
+            100% { transform: translateY(4px); }
+        }
+        
+        /* Navigation */
+        .nav {
+            position: fixed;
+            top: 0;
+            width: 100%;
+            z-index: 1000;
+            background: rgba(0, 0, 0, 0.8);
+            backdrop-filter: blur(20px) hue-rotate(90deg);
+            border-bottom: 2px solid var(--cyber-primary);
+            box-shadow: 0 0 20px var(--cyber-primary);
+        }
+        
+        .nav-container {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 1rem 2rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        .logo {
+            font-family: 'Orbitron', monospace;
+            font-size: 1.8rem;
+            font-weight: 900;
+            color: var(--cyber-primary);
+            text-shadow: 
+                0 0 5px var(--cyber-primary),
+                0 0 10px var(--cyber-primary),
+                0 0 20px var(--cyber-primary);
+            animation: logoGlow 2s ease-in-out infinite alternate;
+        }
+        
+        @keyframes logoGlow {
+            from {
+                text-shadow: 
+                    0 0 5px var(--cyber-primary),
+                    0 0 10px var(--cyber-primary),
+                    0 0 20px var(--cyber-primary);
+            }
+            to {
+                text-shadow: 
+                    0 0 10px var(--cyber-primary),
+                    0 0 20px var(--cyber-primary),
+                    0 0 40px var(--cyber-primary);
+            }
+        }
+        
+        .nav-links {
+            display: flex;
+            gap: 2rem;
+            list-style: none;
+        }
+        
+        .nav-links a {
+            color: var(--text-primary);
+            text-decoration: none;
+            font-weight: 600;
+            position: relative;
+            transition: all 0.3s ease;
+            font-family: 'Share Tech Mono', monospace;
+        }
+        
+        .nav-links a::before {
+            content: '[';
+            opacity: 0;
+            transform: translateX(-10px);
+            transition: all 0.3s ease;
+        }
+        
+        .nav-links a::after {
+            content: ']';
+            opacity: 0;
+            transform: translateX(10px);
+            transition: all 0.3s ease;
+        }
+        
+        .nav-links a:hover::before,
+        .nav-links a:hover::after {
+            opacity: 1;
+            transform: translateX(0);
+            color: var(--cyber-secondary);
+            text-shadow: 0 0 10px var(--cyber-secondary);
+        }
+        
+        .nav-links a:hover {
+            color: var(--cyber-primary);
+            text-shadow: 0 0 10px var(--cyber-primary);
+        }
+        
+        /* Hero Section */
+        .hero {
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+            padding: 0 2rem;
+        }
+        
+        .hero-content {
+            text-align: center;
+            max-width: 1000px;
+            z-index: 10;
+        }
+        
+        .hero-glitch {
+            font-family: 'Orbitron', monospace;
+            font-size: clamp(3rem, 8vw, 8rem);
+            font-weight: 900;
+            color: var(--text-primary);
+            margin-bottom: 2rem;
+            position: relative;
+            text-transform: uppercase;
+            animation: textGlow 3s ease-in-out infinite alternate;
+        }
+        
+        .hero-glitch::before,
+        .hero-glitch::after {
+            content: attr(data-text);
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+        }
+        
+        .hero-glitch::before {
+            animation: glitch-1 2s infinite;
+            color: var(--cyber-secondary);
+            z-index: -1;
+        }
+        
+        .hero-glitch::after {
+            animation: glitch-2 2s infinite;
+            color: var(--cyber-primary);
+            z-index: -2;
+        }
+        
+        @keyframes textGlow {
+            from {
+                text-shadow: 
+                    0 0 20px var(--cyber-primary),
+                    0 0 40px var(--cyber-primary),
+                    0 0 60px var(--cyber-primary);
+            }
+            to {
+                text-shadow: 
+                    0 0 10px var(--cyber-secondary),
+                    0 0 20px var(--cyber-secondary),
+                    0 0 30px var(--cyber-secondary);
+            }
+        }
+        
+        @keyframes glitch-1 {
+            0%, 100% {
+                transform: translate(0);
+                clip-path: polygon(0 0, 100% 0, 100% 100%, 0% 100%);
+            }
+            2% {
+                clip-path: polygon(0 78%, 100% 78%, 100% 78%, 0% 78%);
+                transform: translate(-2px);
+            }
+            6% {
+                clip-path: polygon(0 78%, 100% 78%, 100% 100%, 0% 100%);
+                transform: translate(2px);
+            }
+            8% {
+                clip-path: polygon(0 54%, 100% 54%, 100% 44%, 0% 44%);
+                transform: translate(-1px);
+            }
+        }
+        
+        @keyframes glitch-2 {
+            0%, 100% {
+                transform: translate(0);
+                clip-path: polygon(0 0, 100% 0, 100% 100%, 0% 100%);
+            }
+            3% {
+                clip-path: polygon(0 1%, 100% 1%, 100% 3%, 0% 3%);
+                transform: translate(1px);
+            }
+            5% {
+                clip-path: polygon(0 52%, 100% 52%, 100% 53%, 0% 53%);
+                transform: translate(-2px);
+            }
+            7% {
+                clip-path: polygon(0 32%, 100% 32%, 100% 33%, 0% 33%);
+                transform: translate(2px);
+            }
+        }
+        
+        .hero-subtitle {
+            font-size: clamp(1.2rem, 3vw, 1.8rem);
+            color: var(--cyber-green);
+            margin-bottom: 3rem;
+            font-family: 'Share Tech Mono', monospace;
+            text-shadow: 0 0 10px var(--cyber-green);
+            opacity: 0.9;
+        }
+        
+        /* Cyber Buttons */
+        .cyber-btn {
+            position: relative;
+            padding: 1rem 3rem;
+            margin: 0 1rem;
+            background: transparent;
+            border: 2px solid var(--cyber-primary);
+            color: var(--cyber-primary);
+            font-family: 'Orbitron', monospace;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            clip-path: polygon(0 0, calc(100% - 20px) 0, 100% 100%, 20px 100%);
+            text-decoration: none;
+            display: inline-block;
+            overflow: hidden;
+        }
+        
+        .cyber-btn::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, var(--cyber-primary), transparent);
+            transition: left 0.5s ease;
+        }
+        
+        .cyber-btn:hover::before {
+            left: 100%;
+        }
+        
+        .cyber-btn:hover {
+            box-shadow: 
+                0 0 20px var(--cyber-primary),
+                inset 0 0 20px rgba(0, 255, 255, 0.2);
+            text-shadow: 0 0 10px var(--cyber-primary);
+        }
+        
+        .cyber-btn.secondary {
+            border-color: var(--cyber-secondary);
+            color: var(--cyber-secondary);
+        }
+        
+        .cyber-btn.secondary::before {
+            background: linear-gradient(90deg, transparent, var(--cyber-secondary), transparent);
+        }
+        
+        .cyber-btn.secondary:hover {
+            box-shadow: 
+                0 0 20px var(--cyber-secondary),
+                inset 0 0 20px rgba(255, 0, 128, 0.2);
+            text-shadow: 0 0 10px var(--cyber-secondary);
+        }
+        
+        /* Holographic Cards */
+        .holo-section {
+            padding: 8rem 2rem;
+            position: relative;
+            z-index: 10;
+        }
+        
+        .holo-container {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+        
+        .section-title {
+            text-align: center;
+            font-family: 'Orbitron', monospace;
+            font-size: clamp(2rem, 5vw, 4rem);
+            color: var(--cyber-primary);
+            margin-bottom: 4rem;
+            text-shadow: 0 0 20px var(--cyber-primary);
+            text-transform: uppercase;
+        }
+        
+        .holo-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+            margin-top: 3rem;
+        }
+        
+        .holo-card {
+            position: relative;
+            background: rgba(0, 255, 255, 0.05);
+            border: 2px solid var(--cyber-primary);
+            padding: 2rem;
+            transition: all 0.3s ease;
+            clip-path: polygon(0 0, calc(100% - 15px) 0, 100% 100%, 15px 100%);
+            backdrop-filter: blur(10px);
+            overflow: hidden;
+        }
+        
+        .holo-card::before {
+            content: '';
+            position: absolute;
+            top: -2px;
+            left: -2px;
+            right: -2px;
+            bottom: -2px;
+            background: linear-gradient(45deg, var(--cyber-primary), var(--cyber-secondary), var(--cyber-green), var(--cyber-purple));
+            z-index: -1;
+            opacity: 0;
+            transition: opacity 0.3s ease;
+            clip-path: polygon(0 0, calc(100% - 15px) 0, 100% 100%, 15px 100%);
+        }
+        
+        .holo-card:hover::before {
+            opacity: 1;
+            animation: borderGlow 2s linear infinite;
+        }
+        
+        @keyframes borderGlow {
+            0% { filter: hue-rotate(0deg); }
+            100% { filter: hue-rotate(360deg); }
+        }
+        
+        .holo-card:hover {
+            transform: translateY(-10px) scale(1.02);
+            box-shadow: 
+                0 20px 40px rgba(0, 255, 255, 0.3),
+                inset 0 0 30px rgba(0, 255, 255, 0.1);
+        }
+        
+        .holo-icon {
+            font-size: 3rem;
+            margin-bottom: 1rem;
+            text-align: center;
+            filter: drop-shadow(0 0 10px currentColor);
+        }
+        
+        .holo-title {
+            font-family: 'Orbitron', monospace;
+            font-size: 1.5rem;
+            margin-bottom: 1rem;
+            color: var(--cyber-green);
+            text-shadow: 0 0 10px var(--cyber-green);
+            text-transform: uppercase;
+        }
+        
+        .holo-text {
+            color: var(--text-primary);
+            opacity: 0.9;
+            line-height: 1.6;
+            font-family: 'Share Tech Mono', monospace;
+        }
+        
+        /* Floating Elements */
+        .float-element {
+            position: absolute;
+            width: 2px;
+            height: 2px;
+            background: var(--cyber-primary);
+            box-shadow: 0 0 10px var(--cyber-primary);
+            animation: float 15s infinite linear;
+            z-index: 5;
+        }
+        
+        @keyframes float {
+            0% {
+                transform: translateY(100vh) rotate(0deg);
+                opacity: 0;
+            }
+            10% {
+                opacity: 1;
+            }
+            90% {
+                opacity: 1;
+            }
+            100% {
+                transform: translateY(-100vh) rotate(360deg);
+                opacity: 0;
+            }
+        }
+        
+        /* Matrix Rain */
+        .matrix-rain {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: 1;
+            opacity: 0.3;
+        }
+        
+        /* Audio Visualizer */
+        .audio-visualizer {
+            position: fixed;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            height: 100px;
+            pointer-events: none;
+            z-index: 1;
+            opacity: 0.7;
+        }
+        
+        /* Responsive */
+        @media (max-width: 768px) {
+            .nav-links {
+                display: none;
+            }
+            
+            .cyber-btn {
+                display: block;
+                margin: 1rem auto;
+                max-width: 250px;
+            }
+        }
+        
+        /* Loading Animation */
+        .loading-screen {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: var(--bg-deep);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            z-index: 10000;
+            transition: opacity 1s ease;
+        }
+        
+        .loading-text {
+            font-family: 'Orbitron', monospace;
+            font-size: 2rem;
+            color: var(--cyber-primary);
+            text-shadow: 0 0 20px var(--cyber-primary);
+            animation: loadingPulse 1s ease-in-out infinite;
+        }
+        
+        @keyframes loadingPulse {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0.5; }
+        }
+    </style>
+</head>
+<body>
+    <!-- Loading Screen -->
+    <div class="loading-screen" id="loading">
+        <div class="loading-text">INITIALIZING SYSTEM...</div>
+    </div>
+    
+    <!-- Custom Cursor -->
+    <div class="cursor" id="cursor"></div>
+    
+    <!-- Three.js Background -->
+    <div id="threejs-bg"></div>
+    
+    <!-- Holographic Grid -->
+    <div class="holo-grid"></div>
+    
+    <!-- Scanlines -->
+    <div class="scanlines"></div>
+    
+    <!-- Matrix Rain Canvas -->
+    <canvas class="matrix-rain" id="matrix"></canvas>
+    
+    <!-- Audio Visualizer -->
+    <canvas class="audio-visualizer" id="visualizer"></canvas>
+    
+    <!-- Navigation -->
+    <nav class="nav">
+        <div class="nav-container">
+            <div class="logo">HOSKBREW</div>
+            <ul class="nav-links">
+                <li><a href="#home">HOME</a></li>
+                <li><a href="#services">SERVICES</a></li>
+                <li><a href="#products">PRODUCTS</a></li>
+                <li><a href="#about">ABOUT</a></li>
+                <li><a href="#contact">CONTACT</a></li>
+            </ul>
+        </div>
+    </nav>
+    
+    <!-- Hero Section -->
+    <section class="hero" id="home">
+        <div class="hero-content">
+            <h1 class="hero-glitch" data-text="HOSKBREW">HOSKBREW</h1>
+            <p class="hero-subtitle">// PREMIUM VINTAGE GAMING MATRIX //</p>
+            <div>
+                <a href="#services" class="cyber-btn">ENTER THE GRID</a>
+                <a href="#contact" class="cyber-btn secondary">JACK IN</a>
+            </div>
+        </div>
+    </section>
+    
+    <!-- Services Section -->
+    <section class="holo-section" id="services">
+        <div class="holo-container">
+            <h2 class="section-title">SYSTEM MODULES</h2>
+            <div class="holo-grid">
+                <div class="holo-card">
+                    <div class="holo-icon" style="color: var(--cyber-primary);">🎮</div>
+                    <h3 class="holo-title">CONSOLE MATRIX</h3>
+                    <p class="holo-text">Professionally refurbished vintage gaming systems. NES, SNES, Genesis, PlayStation - all restored to peak performance with quantum-level precision.</p>
+                </div>
+                <div class="holo-card">
+                    <div class="holo-icon" style="color: var(--cyber-secondary);">⚡</div>
+                    <h3 class="holo-title">REPAIR PROTOCOL</h3>
+                    <p class="holo-text">Advanced restoration services using cutting-edge techniques. From basic maintenance to complex board-level repairs - we bring dead systems back to life.</p>
+                </div>
+                <div class="holo-card">
+                    <div class="holo-icon" style="color: var(--cyber-green);">🔧</div>
+                    <h3 class="holo-title">CUSTOM FABRICATION</h3>
+                    <p class="holo-text">3D-printed and custom-manufactured components for obsolete systems. When original parts don't exist, we create the impossible.</p>
+                </div>
+                <div class="holo-card">
+                    <div class="holo-icon" style="color: var(--cyber-accent);">📡</div>
+                    <h3 class="holo-title">KNOWLEDGE TRANSFER</h3>
+                    <p class="holo-text">Comprehensive repair manuals, schematics, and guides. Empowering gamers with the knowledge to maintain their own systems.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+    
+    <!-- Products Section -->
+    <section class="holo-section" id="products">
+        <div class="holo-container">
+            <h2 class="section-title">HARDWARE CATALOG</h2>
+            <div class="holo-grid">
+                <div class="holo-card">
+                    <div class="holo-icon" style="color: var(--cyber-blue);">🕹️</div>
+                    <h3 class="holo-title">NINTENDO ARCHIVE</h3>
+                    <p class="holo-text">NES • SNES • N64 • GameCube<br/>Legendary systems that defined generations, fully restored with military-grade components and tested for optimal performance.</p>
+                    <a href="#" class="cyber-btn" style="margin-top: 1rem; font-size: 0.8rem;">ACCESS ARCHIVE</a>
+                </div>
+                <div class="holo-card">
+                    <div class="holo-icon" style="color: var(--cyber-purple);">🎯</div>
+                    <h3 class="holo-title">SEGA PROTOCOL</h3>
+                    <p class="holo-text">Genesis • Saturn • Dreamcast<br/>Experience blast processing and arcade excellence with our professionally refurbished SEGA systems, each tested and certified.</p>
+                    <a href="#" class="cyber-btn secondary" style="margin-top: 1rem; font-size: 0.8rem;">LOAD PROTOCOL</a>
+                </div>
+                <div class="holo-card">
+                    <div class="holo-icon" style="color: var(--cyber-tertiary);">🛡️</div>
+                    <h3 class="holo-title">REPAIR SERVICE</h3>
+                    <p class="holo-text">All Console Repairs<br/>From simple cleaning to complex motherboard repairs, we restore your console to its former glory using advanced diagnostic tools.</p>
+                    <a href="#" class="cyber-btn" style="margin-top: 1rem; font-size: 0.8rem;">INITIATE REPAIR</a>
+                </div>
+            </div>
+        </div>
+    </section>
+    
+    <!-- About Section -->
+    <section class="holo-section" id="about">
+        <div class="holo-container">
+            <h2 class="section-title">MISSION PROTOCOL</h2>
+            <div class="holo-card" style="max-width: 800px; margin: 0 auto; text-align: center;">
+                <div class="holo-icon" style="color: var(--cyber-green); font-size: 4rem;">🌐</div>
+                <h3 class="holo-title">THE HOSKBREW MATRIX</h3>
+                <p class="holo-text" style="font-size: 1.1rem; line-height: 1.8;">
+                    We are the guardians of gaming history, preserving the digital artifacts of the past for future generations. 
+                    Our mission extends beyond simple repair - we believe in the fundamental right to repair, modify, and enhance. 
+                    Through advanced restoration techniques and cutting-edge fabrication, we ensure that no gaming system is ever truly obsolete.
+                    <br/><br/>
+                    Join us in the fight against planned obsolescence. Together, we keep the retro gaming matrix alive.
+                </p>
+                <a href="#contact" class="cyber-btn" style="margin-top: 2rem;">JOIN THE RESISTANCE</a>
+            </div>
+        </div>
+    </section>
+    
+    <!-- Floating Elements -->
+    <div class="float-element" style="left: 10%; animation-delay: 0s;"></div>
+    <div class="float-element" style="left: 30%; animation-delay: 2s; background: var(--cyber-secondary); box-shadow: 0 0 10px var(--cyber-secondary);"></div>
+    <div class="float-element" style="left: 50%; animation-delay: 4s; background: var(--cyber-green); box-shadow: 0 0 10px var(--cyber-green);"></div>
+    <div class="float-element" style="left: 70%; animation-delay: 6s; background: var(--cyber-accent); box-shadow: 0 0 10px var(--cyber-accent);"></div>
+    <div class="float-element" style="left: 90%; animation-delay: 8s; background: var(--cyber-purple); box-shadow: 0 0 10px var(--cyber-purple);"></div>
+
+    <script>
+        // Loading Screen
+        window.addEventListener('load', function() {
+            setTimeout(() => {
+                document.getElementById('loading').style.opacity = '0';
+                setTimeout(() => {
+                    document.getElementById('loading').style.display = 'none';
+                }, 1000);
+            }, 2000);
+        });
+        
+        // Custom Cursor
+        const cursor = document.getElementById('cursor');
+        const trail = [];
+        let mouseX = 0, mouseY = 0;
+        
+        document.addEventListener('mousemove', (e) => {
+            mouseX = e.clientX;
+            mouseY = e.clientY;
+            
+            cursor.style.left = mouseX - 10 + 'px';
+            cursor.style.top = mouseY - 10 + 'px';
+            
+            // Create trail
+            const trailElement = document.createElement('div');
+            trailElement.className = 'cursor-trail';
+            trailElement.style.left = mouseX - 2 + 'px';
+            trailElement.style.top = mouseY - 2 + 'px';
+            document.body.appendChild(trailElement);
+            
+            trail.push(trailElement);
+            
+            if (trail.length > 10) {
+                const oldTrail = trail.shift();
+                oldTrail.remove();
+            }
+            
+            // Fade out trail elements
+            trail.forEach((element, index) => {
+                element.style.opacity = (index + 1) / trail.length;
+                element.style.transform = `scale(${(index + 1) / trail.length})`;
+            });
+        });
+        
+        // Three.js Background
+        let scene, camera, renderer, particles, particleSystem;
+        
+        function initThreeJS() {
+            scene = new THREE.Scene();
+            camera = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 0.1, 1000);
+            renderer = new THREE.WebGLRenderer({ alpha: true });
+            renderer.setSize(window.innerWidth, window.innerHeight);
+            document.getElementById('threejs-bg').appendChild(renderer.domElement);
+            
+            // Create particles
+            const particleCount = 2000;
+            const geometry = new THREE.BufferGeometry();
+            const positions = new Float32Array(particleCount * 3);
+            const colors = new Float32Array(particleCount * 3);
+            
+            for (let i = 0; i < particleCount; i++) {
+                positions[i * 3] = (Math.random() - 0.5) * 2000;
+                positions[i * 3 + 1] = (Math.random() - 0.5) * 2000;
+                positions[i * 3 + 2] = (Math.random() - 0.5) * 2000;
+                
+                const colorChoice = Math.random();
+                if (colorChoice < 0.3) {
+                    colors[i * 3] = 0; colors[i * 3 + 1] = 1; colors[i * 3 + 2] = 1; // Cyan
+                } else if (colorChoice < 0.6) {
+                    colors[i * 3] = 1; colors[i * 3 + 1] = 0; colors[i * 3 + 2] = 0.5; // Magenta
+                } else {
+                    colors[i * 3] = 0; colors[i * 3 + 1] = 1; colors[i * 3 + 2] = 0.25; // Green
+                }
+            }
+            
+            geometry.setAttribute('position', new THREE.BufferAttribute(positions, 3));
+            geometry.setAttribute('color', new THREE.BufferAttribute(colors, 3));
+            
+            const material = new THREE.PointsMaterial({
+                size: 2,
+                vertexColors: true,
+                transparent: true,
+                opacity: 0.8
+            });
+            
+            particleSystem = new THREE.Points(geometry, material);
+            scene.add(particleSystem);
+            
+            camera.position.z = 500;
+            animate();
+        }
+        
+        function animate() {
+            requestAnimationFrame(animate);
+            
+            particleSystem.rotation.x += 0.001;
+            particleSystem.rotation.y += 0.002;
+            
+            renderer.render(scene, camera);
+        }
+        
+        // Matrix Rain
+        const matrixCanvas = document.getElementById('matrix');
+        const matrixCtx = matrixCanvas.getContext('2d');
+        matrixCanvas.width = window.innerWidth;
+        matrixCanvas.height = window.innerHeight;
+        
+        const matrix = "ABCDEFGHIJKLMNOPQRSTUVWXYZ123456789@#$%^&*()";
+        const matrixArray = matrix.split("");
+        const fontSize = 10;
+        const columns = matrixCanvas.width / fontSize;
+        const drops = [];
+        
+        for (let x = 0; x < columns; x++) {
+            drops[x] = 1;
+        }
+        
+        function drawMatrix() {
+            matrixCtx.fillStyle = 'rgba(0, 0, 0, 0.04)';
+            matrixCtx.fillRect(0, 0, matrixCanvas.width, matrixCanvas.height);
+            
+            matrixCtx.fillStyle = '#00ff41';
+            matrixCtx.font = fontSize + 'px monospace';
+            
+            for (let i = 0; i < drops.length; i++) {
+                const text = matrixArray[Math.floor(Math.random() * matrixArray.length)];
+                matrixCtx.fillText(text, i * fontSize, drops[i] * fontSize);
+                
+                if (drops[i] * fontSize > matrixCanvas.height && Math.random() > 0.975) {
+                    drops[i] = 0;
+                }
+                drops[i]++;
+            }
+        }
+        
+        setInterval(drawMatrix, 35);
+        
+        // Audio Visualizer
+        const visualizerCanvas = document.getElementById('visualizer');
+        const visualizerCtx = visualizerCanvas.getContext('2d');
+        visualizerCanvas.width = window.innerWidth;
+        visualizerCanvas.height = 100;
+        
+        function drawVisualizer() {
+            visualizerCtx.clearRect(0, 0, visualizerCanvas.width, visualizerCanvas.height);
+            
+            const bars = 64;
+            const barWidth = visualizerCanvas.width / bars;
+            
+            for (let i = 0; i < bars; i++) {
+                const barHeight = Math.random() * visualizerCanvas.height * 0.8;
+                
+                const gradient = visualizerCtx.createLinearGradient(0, visualizerCanvas.height, 0, visualizerCanvas.height - barHeight);
+                gradient.addColorStop(0, '#00ffff');
+                gradient.addColorStop(0.5, '#ff0080');
+                gradient.addColorStop(1, '#ffff00');
+                
+                visualizerCtx.fillStyle = gradient;
+                visualizerCtx.fillRect(i * barWidth, visualizerCanvas.height - barHeight, barWidth - 2, barHeight);
+            }
+        }
+        
+        setInterval(drawVisualizer, 50);
+        
+        // Smooth Scrolling
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({
+                        behavior: 'smooth',
+                        block: 'start'
+                    });
+                }
+            });
+        });
+        
+        // Responsive handling
+        window.addEventListener('resize', () => {
+            if (renderer) {
+                camera.aspect = window.innerWidth / window.innerHeight;
+                camera.updateProjectionMatrix();
+                renderer.setSize(window.innerWidth, window.innerHeight);
+            }
+            
+            matrixCanvas.width = window.innerWidth;
+            matrixCanvas.height = window.innerHeight;
+            visualizerCanvas.width = window.innerWidth;
+        });
+        
+        // Initialize everything
+        setTimeout(initThreeJS, 100);
+        
+        // Console message
+        console.log('%c🎮 HOSKBREW CYBERPUNK MATRIX INITIALIZED 🎮', 'color: #00ffff; font-size: 16px; font-weight: bold;');
+        console.log('%cWELCOME TO THE GRID, USER...', 'color: #ff0080; font-size: 14px;');
+    </script>
+</body>
+</html>

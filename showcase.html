@@ -1,0 +1,241 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>HOSKBREW GAMING | Ultimate Retro Gaming Experience</title>
+    
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;500;600;700;800;900&family=Press+Start+2P&display=swap" rel="stylesheet">
+    
+    <!-- Gaming Theme -->
+    <link rel="stylesheet" href="hoskbrew-gaming-theme.css">
+    
+    <style>
+        .hero-banner {
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+            overflow: hidden;
+            background: linear-gradient(135deg, #0a0a0f 0%, #1a1a24 50%, #0a0a0f 100%);
+        }
+        
+        .console-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+            padding: 50px;
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+        
+        .console-card {
+            background: var(--bg-card);
+            border: 2px solid transparent;
+            border-radius: 15px;
+            padding: 30px;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+            transition: all 0.3s ease;
+        }
+        
+        .console-card::before {
+            content: '';
+            position: absolute;
+            top: -2px;
+            left: -2px;
+            right: -2px;
+            bottom: -2px;
+            background: var(--gradient-cyber);
+            border-radius: 15px;
+            opacity: 0;
+            z-index: -1;
+            transition: opacity 0.3s ease;
+        }
+        
+        .console-card:hover::before {
+            opacity: 1;
+            animation: borderRotate 3s linear infinite;
+        }
+        
+        .console-card:hover {
+            transform: translateY(-10px) scale(1.05);
+            box-shadow: 
+                0 20px 40px rgba(0, 212, 255, 0.4),
+                0 0 80px rgba(255, 0, 128, 0.2);
+        }
+        
+        .pixel-art {
+            font-family: 'Press Start 2P', cursive;
+            font-size: 12px;
+            line-height: 2;
+            color: var(--accent-primary);
+            text-shadow: 2px 2px 0px rgba(0, 0, 0, 0.8);
+        }
+        
+        .feature-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 20px;
+            padding: 50px;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+        
+        .feature-item {
+            text-align: center;
+            padding: 30px 20px;
+            background: rgba(30, 30, 46, 0.5);
+            border: 1px solid var(--accent-primary);
+            border-radius: 10px;
+            transition: all 0.3s ease;
+        }
+        
+        .feature-item:hover {
+            background: rgba(30, 30, 46, 0.8);
+            transform: translateY(-5px);
+            box-shadow: 0 10px 30px rgba(0, 212, 255, 0.3);
+        }
+        
+        .feature-icon {
+            font-size: 48px;
+            margin-bottom: 15px;
+        }
+        
+        @media (max-width: 768px) {
+            .feature-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+            .console-grid {
+                padding: 20px;
+            }
+        }
+    </style>
+</head>
+<body class="nintendo-theme">
+    <!-- Hero Banner -->
+    <section class="hero-banner">
+        <div class="retro-grid"></div>
+        <div style="z-index: 10; position: relative; text-align: center; padding: 40px;">
+            <h1 class="glitch" data-text="HOSKBREW" style="font-size: 5em; margin-bottom: 20px;">HOSKBREW</h1>
+            <p class="pixel-art">[ PRESS START TO BEGIN ]</p>
+            <h2 class="neon-text" style="font-size: 2em; margin: 30px 0;">LEVEL UP YOUR NOSTALGIA</h2>
+            <p style="font-size: 1.2em; color: var(--text-secondary); max-width: 600px; margin: 0 auto 40px;">
+                Your ultimate destination for vintage gaming. We preserve and celebrate the golden age of gaming with premium refurbished consoles, rare games, and expert repair services.
+            </p>
+            <div style="display: flex; gap: 20px; justify-content: center; flex-wrap: wrap;">
+                <button class="pixel-button" onclick="scrollToConsoles()">BROWSE CONSOLES</button>
+                <button class="pixel-button" style="background: linear-gradient(135deg, #ff0080 0%, #ff6600 100%);">SHOP GAMES</button>
+                <button class="pixel-button" style="background: linear-gradient(135deg, #00ff88 0%, #00d4ff 100%);">REPAIR SERVICE</button>
+            </div>
+        </div>
+    </section>
+    
+    <!-- Features Section -->
+    <section style="background: var(--bg-secondary); padding: 80px 0;">
+        <h2 class="glitch neon-text" data-text="POWER-UPS" style="text-align: center; font-size: 3em; margin-bottom: 50px;">POWER-UPS</h2>
+        <div class="feature-grid">
+            <div class="feature-item">
+                <div class="feature-icon">🎮</div>
+                <h3 class="neon-text">CLASSIC CONSOLES</h3>
+                <p>Professionally refurbished vintage gaming systems</p>
+            </div>
+            <div class="feature-item">
+                <div class="feature-icon">🕹️</div>
+                <h3 class="neon-text">RARE GAMES</h3>
+                <p>Hard-to-find titles and collector's editions</p>
+            </div>
+            <div class="feature-item">
+                <div class="feature-icon">🔧</div>
+                <h3 class="neon-text">CUSTOM PARTS</h3>
+                <p>3D-printed and custom-manufactured components</p>
+            </div>
+            <div class="feature-item">
+                <div class="feature-icon">⚡</div>
+                <h3 class="neon-text">EXPERT REPAIRS</h3>
+                <p>Professional restoration and modification services</p>
+            </div>
+        </div>
+    </section>
+    
+    <!-- Console Showcase -->
+    <section id="consoles" style="padding: 80px 0;">
+        <h2 class="glitch neon-text" data-text="CHOOSE YOUR FIGHTER" style="text-align: center; font-size: 3em; margin-bottom: 50px;">CHOOSE YOUR FIGHTER</h2>
+        <div class="console-grid">
+            <div class="console-card gaming-card">
+                <h3 class="neon-text">NINTENDO</h3>
+                <div style="font-size: 80px; margin: 20px 0;">🎮</div>
+                <p class="pixel-art">NES • SNES • N64</p>
+                <p style="color: var(--text-secondary); margin: 20px 0;">The legendary systems that defined generations</p>
+                <button class="pixel-button" style="width: 100%;">EXPLORE</button>
+            </div>
+            <div class="console-card gaming-card">
+                <h3 class="neon-text">SEGA</h3>
+                <div style="font-size: 80px; margin: 20px 0;">🕹️</div>
+                <p class="pixel-art">GENESIS • SATURN • DREAMCAST</p>
+                <p style="color: var(--text-secondary); margin: 20px 0;">Blast processing and arcade excellence</p>
+                <button class="pixel-button" style="width: 100%; background: linear-gradient(135deg, #17569b 0%, #0090d6 100%);">EXPLORE</button>
+            </div>
+            <div class="console-card gaming-card">
+                <h3 class="neon-text">PLAYSTATION</h3>
+                <div style="font-size: 80px; margin: 20px 0;">🎯</div>
+                <p class="pixel-art">PS1 • PS2 • PSP</p>
+                <p style="color: var(--text-secondary); margin: 20px 0;">The revolution of 3D gaming</p>
+                <button class="pixel-button" style="width: 100%; background: linear-gradient(135deg, #003087 0%, #00439c 100%);">EXPLORE</button>
+            </div>
+            <div class="console-card gaming-card">
+                <h3 class="neon-text">ATARI</h3>
+                <div style="font-size: 80px; margin: 20px 0;">👾</div>
+                <p class="pixel-art">2600 • 5200 • 7800</p>
+                <p style="color: var(--text-secondary); margin: 20px 0;">Where it all began</p>
+                <button class="pixel-button" style="width: 100%; background: linear-gradient(135deg, #d40000 0%, #ff6600 100%);">EXPLORE</button>
+            </div>
+        </div>
+    </section>
+    
+    <!-- Call to Action -->
+    <section style="background: var(--bg-tertiary); padding: 100px 20px; text-align: center;">
+        <h2 class="glitch neon-text" data-text="GAME OVER?" style="font-size: 3em; margin-bottom: 20px;">GAME OVER?</h2>
+        <p class="pixel-art" style="font-size: 16px; margin-bottom: 30px;">INSERT COIN TO CONTINUE</p>
+        <p style="font-size: 1.2em; color: var(--text-secondary); max-width: 600px; margin: 0 auto 40px;">
+            Join the HOSKBREW community and keep the legacy of retro gaming alive. 
+            Expert support, rare finds, and a passion for preservation.
+        </p>
+        <div style="display: flex; gap: 20px; justify-content: center; flex-wrap: wrap;">
+            <button class="pixel-button" style="font-size: 18px; padding: 20px 50px;">JOIN THE QUEST</button>
+            <button class="pixel-button" style="font-size: 18px; padding: 20px 50px; background: linear-gradient(135deg, #00ff88 0%, #00d4ff 100%);">CONTACT SUPPORT</button>
+        </div>
+    </section>
+    
+    <!-- Footer -->
+    <footer style="background: var(--bg-primary); padding: 50px 20px; text-align: center; border-top: 2px solid var(--accent-primary);">
+        <h3 class="neon-text" style="margin-bottom: 20px;">HOSKBREW GAMING</h3>
+        <p class="pixel-art" style="margin-bottom: 30px;">[ HIGH SCORE: ∞ ]</p>
+        <p style="color: var(--text-muted);">© 2024 HOSKBREW. All rights reserved. Power up your nostalgia!</p>
+        <p style="color: var(--text-muted); margin-top: 20px;">Press ↑↑↓↓←→←→BA for a surprise!</p>
+    </footer>
+    
+    <!-- Gaming Effects -->
+    <script src="hoskbrew-gaming.js"></script>
+    <script>
+        function scrollToConsoles() {
+            document.getElementById('consoles').scrollIntoView({ behavior: 'smooth' });
+        }
+        
+        // Theme rotation
+        const themes = ['nintendo-theme', 'playstation-theme', 'xbox-theme', 'sega-theme', 'atari-theme'];
+        let currentTheme = 0;
+        
+        setInterval(() => {
+            document.body.classList.remove(...themes);
+            currentTheme = (currentTheme + 1) % themes.length;
+            document.body.classList.add(themes[currentTheme]);
+        }, 10000);
+    </script>
+</body>
+</html>
